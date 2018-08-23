@@ -5,19 +5,20 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
-import presentacion.vista.VentanaEditarContacto;
-import presentacion.vista.VentanaLocalidad;
-import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
-import dto.LocalidadDTO;
+import presentacion.vista.contacto.VentanaContactoAgregar;
+import presentacion.vista.contacto.VentanaContactoModificar;
+import presentacion.vista.localidad.VentanaLocalidadABM;
+import presentacion.vista.tipocontacto.VentanaTipoContactoABM;
 import dto.PersonaDTO;
 
 public class Controlador implements ActionListener {
 	private Vista vista;
 	private List<PersonaDTO> personas_en_tabla;
-	private VentanaPersona ventanaPersona;
-	private VentanaLocalidad ventanaLocalidad;
-	private VentanaEditarContacto ventanaEditarContacto;
+	private VentanaContactoAgregar ventanaPersona;
+	private VentanaLocalidadABM ventanaLocalidadABM;
+	private VentanaTipoContactoABM ventanaTipoContactoABM;
+	private VentanaContactoModificar ventanaEditarContacto;
 	private Agenda agenda;
 	
 	public Controlador(Vista vista, Agenda agenda) {
@@ -32,17 +33,14 @@ public class Controlador implements ActionListener {
 	public void inicializar() {
 		this.llenarTabla();
 		vista.show();
-		System.out.println("Inicializando");
 	}
 	
 	private void llenarTabla() {
-		System.out.println("Llenando tabla");
 		vista.getModelPersonas().setRowCount(0);
 		vista.getModelPersonas().setColumnCount(0);
 		vista.getModelPersonas().setColumnIdentifiers(vista.getNombreColumnas());
-		//nombreColumnas = {"Nombre y apellido","Telefono","Mail","Calle","Numero","Piso","Depto","Localidad","Cumpleaños", "Tipo de Contacto"};
+
 		personas_en_tabla = agenda.obtenerPersonas();
-		System.out.println(personas_en_tabla.size());
 		
 		for (int i = 0; i < personas_en_tabla.size(); i ++) {
 			Object[] fila = {
@@ -57,19 +55,16 @@ public class Controlador implements ActionListener {
 					personas_en_tabla.get(i).getFecha_nacimiento().toString(),
 					personas_en_tabla.get(i).getTipo_contacto_id().toString()
 					};
-			System.out.println(fila);
-			this.vista.getModelPersonas().addRow(fila);
-		
+			this.vista.getModelPersonas().addRow(fila);		
 		}
 		
-		System.out.println("Saliendo de llenar tabla");
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		
 		// boton agregar contacto de la vista principal
 		if(e.getSource() == this.vista.getBtnAgregar())	{
-			this.ventanaPersona = new VentanaPersona(this);
+			this.ventanaPersona = new VentanaContactoAgregar(this);
 		}
 		
 		// boton borrar contacto de la vista principal	
@@ -86,7 +81,7 @@ public class Controlador implements ActionListener {
 			int[] filas_seleccionadas = vista.getTablaPersonas().getSelectedRows();
 			if (filas_seleccionadas.length>0) {
 				PersonaDTO persona = personas_en_tabla.get(0);
-				ventanaEditarContacto = new VentanaEditarContacto(this, persona);
+				ventanaEditarContacto = new VentanaContactoModificar(this, persona);
 			}
 		}
 
@@ -122,11 +117,19 @@ public class Controlador implements ActionListener {
 			
 			// boton agregar localidad de la vista persona
 			else if(e.getSource() == ventanaPersona.getBtnAgregarLocalidad()) {
-				ventanaLocalidad = new VentanaLocalidad(this);
+				ventanaLocalidadABM = new VentanaLocalidadABM();
+				new ControladorLocalidadABM(ventanaLocalidadABM, agenda);
 			}
 			
+			// boton agregar tipo de contacto de la vista persona
+			else if(e.getSource() == ventanaPersona.getBtnAgregarTipoContacto()) {
+				ventanaTipoContactoABM = new VentanaTipoContactoABM();
+				new ControladorTipoContactoABM(ventanaTipoContactoABM, agenda);
+			}
+			
+			
 		}
-		
+		/*
 		// BOTONES DE LA VENTANA DE AGREGAR LOCALIDAD
 		if (ventanaLocalidad != null) {
 			if(e.getSource() == ventanaLocalidad.getBtnAgregarLocalidad()) {
@@ -136,7 +139,7 @@ public class Controlador implements ActionListener {
 				ventanaLocalidad.dispose();
 			}
 		}		
-		
+		*/
 		// BOTONES DE LA VENTANA DE EDITAR CONTACTO
 		if (ventanaEditarContacto != null) {
 			if(e.getSource() == ventanaEditarContacto.getBtnEditarContacto()) {
@@ -153,7 +156,7 @@ public class Controlador implements ActionListener {
 						ventanaEditarContacto.getDepto(),
 						ventanaEditarContacto.getFecha()
 						);
-				agenda.actualizarPersona(contacto);
+				agenda.modificarPersona(contacto);
 				llenarTabla();
 				ventanaEditarContacto.dispose();
 			}

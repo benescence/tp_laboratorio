@@ -1,7 +1,6 @@
 package modelo;
 
 import java.util.List;
-
 import dto.LocalidadDTO;
 import dto.PersonaDTO;
 import dto.TipoContactoDTO;
@@ -21,28 +20,54 @@ public class Agenda {
 		tipoContactoDAO = metodo_persistencia.crearTipoContactoDAO();
 	}
 	
-	public void agregarPersona(PersonaDTO nuevaPersona) {
-		personaDAO.insert(nuevaPersona);
+	
+	// ABM PERSONAS
+	public void agregarPersona(PersonaDTO persona) {
+		personaDAO.insert(persona);
 	}
-
-	public void actualizarPersona(PersonaDTO nuevaPersona) {
-		personaDAO.update(nuevaPersona);
+	
+	public void borrarPersona(PersonaDTO persona) {
+		personaDAO.delete(persona);
 	}
-
-	public void agregarLocalidad(LocalidadDTO localidad) {
-		localidadDAO.insert(localidad);
-	}
-
-	public void borrarPersona(PersonaDTO persona_a_eliminar) {
-		personaDAO.delete(persona_a_eliminar);
+	
+	public void modificarPersona(PersonaDTO persona) {
+		personaDAO.update(persona);
 	}
 	
 	public List<PersonaDTO> obtenerPersonas() {
 		return personaDAO.readAll();		
 	}
+
 	
+	// ABM LOCALIDADES
+	public void agregarLocalidad(LocalidadDTO localidad) {
+		localidadDAO.insert(localidad);
+	}
+	
+	public void borrarLocalidad(LocalidadDTO localidad) {
+		localidadDAO.delete(localidad);
+	}
+
+	public void modificarLocalidad(LocalidadDTO localidad) {
+		localidadDAO.update(localidad);
+	}
+
 	public List<LocalidadDTO> obtenerLocalidades() {
 		return localidadDAO.readAll();		
+	}
+	
+	
+	// ABM TIPOS DE CONTACTO
+	public void agregarTipoDeContacto(TipoContactoDTO tipo) {
+		tipoContactoDAO.insert(tipo);
+	}
+	
+	public void borrarTipoDeContacto(TipoContactoDTO tipo) {
+		tipoContactoDAO.delete(tipo);
+	}
+
+	public void modificarTipoDeContacto(TipoContactoDTO tipo) {
+		tipoContactoDAO.update(tipo);
 	}
 	
 	public List<TipoContactoDTO> obtenerTiposDeContacto() {

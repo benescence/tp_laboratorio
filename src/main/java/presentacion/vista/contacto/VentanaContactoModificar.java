@@ -1,4 +1,4 @@
-package presentacion.vista;
+package presentacion.vista.contacto;
 
 import java.sql.Date;
 import java.util.List;
@@ -17,7 +17,7 @@ import persistencia.dao.mysql.DAOSQLFactory;
 import presentacion.controlador.Controlador;
 import javax.swing.JComboBox;
 
-public class VentanaEditarContacto extends JFrame {
+public class VentanaContactoModificar extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private Controlador controlador;
 	private JPanel contenedor_principal;
@@ -29,7 +29,7 @@ public class VentanaEditarContacto extends JFrame {
 	private JComboBox <TipoContactoDTO> inTipoContacto;
 	private PersonaDTO persona;
 	
-	public VentanaEditarContacto(Controlador controlador, PersonaDTO persona) {
+	public VentanaContactoModificar(Controlador controlador, PersonaDTO persona) {
 		super();
 		this.controlador = controlador;
 		this.persona = persona;
