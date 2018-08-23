@@ -45,6 +45,7 @@ public class VentanaLocalidadABM extends JFrame{
 		panel.add(btnAgregar);
 		panel.add(btnBorrar);
 		panel.add(btnModificar);
+		setVisible(true);
 	}
 	
 	public JButton getBtnAgregar() {

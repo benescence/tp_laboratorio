@@ -10,86 +10,67 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import persistencia.conexion.Conexion;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Vista {
-	private JFrame frame;
-	private JTable tablaPersonas;
-	private JButton btnAgregar, btnBorrar, btnReporte, btnEditar;
-	private DefaultTableModel modelPersonas;
-	private String[] nombreColumnas = {"Nombre y apellido","Telefono","Mail","Calle","Numero","Piso","Depto","Localidad","Cumpleaños", "Tipo de Contacto"};
+	private JFrame ventana;
+	private JTable tablaContactos;
+	private JButton btnAgregar, btnBorrar, btnModificar, btnReporte;
+	private DefaultTableModel modelContactos;
+	private String[] nombreColumnas = {"Nombre","Teléfono","E-mail","Calle","Número","Piso","Depto","Localidad","F.Nacimiento", "Tipo de contacto"};
 
 	public Vista() {
 		super();
-		initialize();
-	}
-
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 1093, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		ventana = new JFrame();
+		ventana.setBounds(100, 100, 1050, 350);
+		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ventana.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 1034, 262);
-		frame.getContentPane().add(panel);
+		panel.setBounds(0, 0, 1050, 350);
+		ventana.getContentPane().add(panel);
 		panel.setLayout(null);
 		
+		modelContactos = new DefaultTableModel(null, nombreColumnas);
+		tablaContactos = new JTable(modelContactos);
+		
 		JScrollPane spPersonas = new JScrollPane();
-		spPersonas.setBounds(10, 11, 1009, 182);
-		panel.add(spPersonas);
+		spPersonas.setBounds(10, 10, 1010, 260);
+		spPersonas.setViewportView(tablaContactos);
+		panel.add(spPersonas);		
+
+		btnAgregar = new JButton("Agregar contacto");
+		btnBorrar = new JButton("Borrar contacto");
+		btnModificar = new JButton("Modificar contacto");
+		btnReporte = new JButton("Mostrar reporte");
 		
-		modelPersonas = new DefaultTableModel(null,nombreColumnas);
-		tablaPersonas = new JTable(modelPersonas);
-				
-		/*
-		tablaPersonas = new JTable(new DefaultTableModel(
-			new Object[][] {
-			},
-			//new String[] {
-				//"Nombre y apellido", "Telefono", "Mail", "calle", "num", "piso", "depto", "Localidad", "Cumplea\u00F1os", "Tipo de Contacto"
-			//}
-			nombreColumnas
-		));
-		*/
-		spPersonas.setViewportView(tablaPersonas);
+		int fila = 280, ancho = 200, alto = 20;
+		btnAgregar.setBounds(10, fila, ancho, alto);
+		btnBorrar.setBounds(280, fila, ancho, alto);
+		btnModificar.setBounds(550, fila, ancho, alto);		
+		btnReporte.setBounds(820, fila, ancho, alto);
 		
-		btnAgregar = new JButton("Agregar");
-		btnAgregar.setBounds(10, 228, 89, 23);
 		panel.add(btnAgregar);
-		
-		btnEditar = new JButton("Editar");
-		btnEditar.setBounds(109, 228, 89, 23);
-		panel.add(btnEditar);
-		
-		btnBorrar = new JButton("Borrar");
-		btnBorrar.setBounds(208, 228, 89, 23);
 		panel.add(btnBorrar);
-		
-		btnReporte = new JButton("Reporte");
-		btnReporte.setBounds(307, 228, 89, 23);
+		panel.add(btnModificar);
 		panel.add(btnReporte);
 	}
 	
-	public void show()
-	{
-		this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		this.frame.addWindowListener(new WindowAdapter() 
-		{
+	public void show() {
+		ventana.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		ventana.addWindowListener(new WindowAdapter() {
 			@Override
 		    public void windowClosing(WindowEvent e) {
-		        int confirm = JOptionPane.showOptionDialog(
-		             null, "Estas seguro que quieres salir de la Agenda!?", 
+		        int confirmar = JOptionPane.showOptionDialog(
+		             null, "¿Salir de la Agenda?", 
 		             "Confirmacion", JOptionPane.YES_NO_OPTION,
 		             JOptionPane.QUESTION_MESSAGE, null, null, null);
-		        if (confirm == 0) {
+		        if (confirmar == 0) {
 		        	Conexion.getConexion().cerrarConexion();
 		           System.exit(0);
 		        }
 		    }
 		});
-		this.frame.setVisible(true);
+		ventana.setVisible(true);
 	}
 	
 	public JButton getBtnAgregar() {
@@ -104,19 +85,20 @@ public class Vista {
 		return btnReporte;
 	}
 
-	public JButton getBtnEditar(){
-		return btnEditar;
+	public JButton getBtnModificar(){
+		return btnModificar;
 	}
 	
-	public DefaultTableModel getModelPersonas()	{
-		return modelPersonas;
+	public DefaultTableModel getModelContactos()	{
+		return modelContactos;
 	}
 	
-	public JTable getTablaPersonas(){
-		return tablaPersonas;
+	public JTable getTablaContactos(){
+		return tablaContactos;
 	}
 
 	public String[] getNombreColumnas()	{
 		return nombreColumnas;
 	}
+
 }

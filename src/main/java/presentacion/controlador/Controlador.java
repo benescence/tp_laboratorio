@@ -15,7 +15,7 @@ import dto.PersonaDTO;
 public class Controlador implements ActionListener {
 	private Vista vista;
 	private List<PersonaDTO> personas_en_tabla;
-	private VentanaContactoAgregar ventanaPersona;
+	private VentanaContactoAgregar ventanaContactoAgregar;
 	private VentanaLocalidadABM ventanaLocalidadABM;
 	private VentanaTipoContactoABM ventanaTipoContactoABM;
 	private VentanaContactoModificar ventanaEditarContacto;
@@ -27,7 +27,7 @@ public class Controlador implements ActionListener {
 		this.vista.getBtnAgregar().addActionListener(this);
 		this.vista.getBtnBorrar().addActionListener(this);
 		this.vista.getBtnReporte().addActionListener(this);
-		this.vista.getBtnEditar().addActionListener(this);
+		this.vista.getBtnModificar().addActionListener(this);
 	}
 	
 	public void inicializar() {
@@ -36,9 +36,9 @@ public class Controlador implements ActionListener {
 	}
 	
 	private void llenarTabla() {
-		vista.getModelPersonas().setRowCount(0);
-		vista.getModelPersonas().setColumnCount(0);
-		vista.getModelPersonas().setColumnIdentifiers(vista.getNombreColumnas());
+		vista.getModelContactos().setRowCount(0);
+		vista.getModelContactos().setColumnCount(0);
+		vista.getModelContactos().setColumnIdentifiers(vista.getNombreColumnas());
 
 		personas_en_tabla = agenda.obtenerPersonas();
 		
@@ -55,7 +55,7 @@ public class Controlador implements ActionListener {
 					personas_en_tabla.get(i).getFecha_nacimiento().toString(),
 					personas_en_tabla.get(i).getTipo_contacto_id().toString()
 					};
-			this.vista.getModelPersonas().addRow(fila);		
+			this.vista.getModelContactos().addRow(fila);		
 		}
 		
 	}
@@ -64,12 +64,12 @@ public class Controlador implements ActionListener {
 		
 		// boton agregar contacto de la vista principal
 		if(e.getSource() == this.vista.getBtnAgregar())	{
-			this.ventanaPersona = new VentanaContactoAgregar(this);
+			this.ventanaContactoAgregar = new VentanaContactoAgregar(this);
 		}
 		
 		// boton borrar contacto de la vista principal	
 		else if(e.getSource() == vista.getBtnBorrar()) {
-			int[] filas_seleccionadas = vista.getTablaPersonas().getSelectedRows();
+			int[] filas_seleccionadas = vista.getTablaContactos().getSelectedRows();
 			for (int fila:filas_seleccionadas)
 				agenda.borrarPersona(personas_en_tabla.get(fila));
 			
@@ -77,8 +77,8 @@ public class Controlador implements ActionListener {
 		}
 
 		// boton editar contacto de la vista principal	
-		else if(e.getSource() == vista.getBtnEditar()) {
-			int[] filas_seleccionadas = vista.getTablaPersonas().getSelectedRows();
+		else if(e.getSource() == vista.getBtnModificar()) {
+			int[] filas_seleccionadas = vista.getTablaContactos().getSelectedRows();
 			if (filas_seleccionadas.length>0) {
 				PersonaDTO persona = personas_en_tabla.get(0);
 				ventanaEditarContacto = new VentanaContactoModificar(this, persona);
@@ -93,36 +93,36 @@ public class Controlador implements ActionListener {
 		
 		
 		// BOTONES DE LA VISTA PERSONA (AGREGAR CONTACTO)
-		if (ventanaPersona != null) {
+		if (ventanaContactoAgregar != null) {
 		
 		// boton agregar contacto de la vista persona
-			if(e.getSource() == ventanaPersona.getBtnAgregarPersona()) {
+			if(e.getSource() == ventanaContactoAgregar.getBtnAgregarPersona()) {
 				PersonaDTO nuevaPersona = new PersonaDTO(
 						-1,
-						ventanaPersona.getLocalidad().getLocalidad_id(),
-						ventanaPersona.getTipoContacto().getTipo_contacto_id(),
-						ventanaPersona.getNombre(),
-						ventanaPersona.getTelefono(),
-						ventanaPersona.getMail(),
-						ventanaPersona.getCalle(),
-						ventanaPersona.getNumero(),
-						ventanaPersona.getPiso(),
-						ventanaPersona.getDepto(),
-						ventanaPersona.getFecha()
+						ventanaContactoAgregar.getLocalidad().getLocalidad_id(),
+						ventanaContactoAgregar.getTipoContacto().getTipo_contacto_id(),
+						ventanaContactoAgregar.getNombre(),
+						ventanaContactoAgregar.getTelefono(),
+						ventanaContactoAgregar.getMail(),
+						ventanaContactoAgregar.getCalle(),
+						ventanaContactoAgregar.getNumero(),
+						ventanaContactoAgregar.getPiso(),
+						ventanaContactoAgregar.getDepto(),
+						ventanaContactoAgregar.getFecha()
 						);
 				agenda.agregarPersona(nuevaPersona);
 				llenarTabla();
-				ventanaPersona.dispose();
+				ventanaContactoAgregar.dispose();
 			}
 			
 			// boton agregar localidad de la vista persona
-			else if(e.getSource() == ventanaPersona.getBtnAgregarLocalidad()) {
+			else if(e.getSource() == ventanaContactoAgregar.getBtnAgregarLocalidad()) {
 				ventanaLocalidadABM = new VentanaLocalidadABM();
 				new ControladorLocalidadABM(ventanaLocalidadABM, agenda);
 			}
 			
 			// boton agregar tipo de contacto de la vista persona
-			else if(e.getSource() == ventanaPersona.getBtnAgregarTipoContacto()) {
+			else if(e.getSource() == ventanaContactoAgregar.getBtnAgregarTipoContacto()) {
 				ventanaTipoContactoABM = new VentanaTipoContactoABM();
 				new ControladorTipoContactoABM(ventanaTipoContactoABM, agenda);
 			}
