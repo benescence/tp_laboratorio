@@ -52,6 +52,10 @@ public class Agenda {
 		localidadDAO.update(localidad);
 	}
 
+	public String obtenerDescripcionDeLocalidad(Integer localidad_id) {
+		return localidadDAO.selectDescripcion(localidad_id);
+	}
+	
 	public List<LocalidadDTO> obtenerLocalidades() {
 		return localidadDAO.readAll();		
 	}
@@ -68,6 +72,10 @@ public class Agenda {
 
 	public void modificarTipoDeContacto(TipoContactoDTO tipo) {
 		tipoContactoDAO.update(tipo);
+	}
+	
+	public String obtenerDescripcionDeTipoDeContacto(Integer tipo_de_contacto_id) {
+		return tipoContactoDAO.selectDescripcion(tipo_de_contacto_id);
 	}
 	
 	public List<TipoContactoDTO> obtenerTiposDeContacto() {

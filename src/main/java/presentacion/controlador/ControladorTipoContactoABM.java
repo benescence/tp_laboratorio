@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import modelo.Agenda;
+import presentacion.vista.contacto.VentanaContactoAgregar;
+import presentacion.vista.contacto.VentanaContactoModificar;
 import presentacion.vista.tipocontacto.VentanaTipoContactoABM;
 import presentacion.vista.tipocontacto.VentanaTipoContactoABMAgregar;
 import presentacion.vista.tipocontacto.VentanaTipoContactoABMModificar;
@@ -14,11 +16,25 @@ public class ControladorTipoContactoABM implements ActionListener {
 	private VentanaTipoContactoABM ventanaTipoContactoABM;
 	private VentanaTipoContactoABMAgregar ventanaTipoContactoABMAgregar;
 	private VentanaTipoContactoABMModificar ventanaTipoContactoABMModificar;
+	private VentanaContactoAgregar ventanaContactoAgregar;
+	private VentanaContactoModificar ventanaContactoModificar;
 	private Agenda agenda;
+
+	public ControladorTipoContactoABM(VentanaTipoContactoABM ventanaTipoContactoABM, VentanaContactoAgregar ventanaContactoAgregar, Agenda agenda) {
+		this.ventanaTipoContactoABM = ventanaTipoContactoABM;
+		this.ventanaContactoAgregar = ventanaContactoAgregar;
+		this.agenda = agenda;
+		inicializar();
+	}
+
+	public ControladorTipoContactoABM(VentanaTipoContactoABM ventanaTipoContactoABM, VentanaContactoModificar ventanaContactoModificar, Agenda agenda) {
+		this.ventanaTipoContactoABM = ventanaTipoContactoABM;
+		this.ventanaContactoModificar = ventanaContactoModificar;
+		this.agenda = agenda;
+		inicializar();
+	}
 	
-	public ControladorTipoContactoABM(VentanaTipoContactoABM pVentanaTipoContactoABM, Agenda pAgenda) {
-		ventanaTipoContactoABM = pVentanaTipoContactoABM;
-		agenda = pAgenda;
+	private void inicializar() {
 		ventanaTipoContactoABM.getBtnAgregar().addActionListener(this);
 		ventanaTipoContactoABM.getBtnBorrar().addActionListener(this);
 		ventanaTipoContactoABM.getBtnModificar().addActionListener(this);
@@ -34,12 +50,18 @@ public class ControladorTipoContactoABM implements ActionListener {
 		for (TipoContactoDTO tipo: tipos_de_contacto_en_tabla) {
 			Object[] fila = {tipo.getDescripcion()};
 			ventanaTipoContactoABM.getModeloTiposDeContacto().addRow(fila);
-		}		
+		}
+		
+		if (ventanaContactoAgregar != null)
+			ventanaContactoAgregar.cargarTiposDeContacto();
+		
+		if (ventanaContactoModificar != null)
+			ventanaContactoModificar.cargarTiposDeContacto();
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		
-		// BOTONES DEL ABM PRINCIPAL
+		// ************************** BOTONES DEL ABM PRINCIPAL ***********************************
 		
 		// AGREGAR TIPO DE CONTACTO
 		if (e.getSource() == ventanaTipoContactoABM.getBtnAgregar())	{
@@ -65,7 +87,7 @@ public class ControladorTipoContactoABM implements ActionListener {
 		}
 		
 		
-		// BOTONES DE LA VENTANA AGREGAR TIPO DE CONTACTO
+		// ********************** BOTONES DE LA VENTANA AGREGAR TIPO DE CONTACTO *******************************
 		if (ventanaTipoContactoABMAgregar != null) {
 			// AGREGAR TIPO DE CONTACTO
 			if(e.getSource() == ventanaTipoContactoABMAgregar.getBtnAgregar()) {
@@ -76,7 +98,7 @@ public class ControladorTipoContactoABM implements ActionListener {
 			}
 		}
 		
-		// BOTONES DE LA VENTANA MODIFICAR TIPO DE CONTACTO
+		// ********************** BOTONES DE LA VENTANA MODIFICAR TIPO DE CONTACTO *******************************
 		if (ventanaTipoContactoABMModificar != null) {
 			// MODIFICAR TIPO DE CONTACTO
 			if(e.getSource() == ventanaTipoContactoABMModificar.getBtnModificar()) {

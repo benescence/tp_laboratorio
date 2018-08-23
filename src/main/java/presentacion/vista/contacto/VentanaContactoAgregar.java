@@ -24,7 +24,7 @@ public class VentanaContactoAgregar extends JFrame {
 	private JPanel contenedor;
 	private JCalendar inFecha;
 	private JTextField inEmail, inCalle, inDepto, inNumero, inPiso, inTelefono, inNombre;
-	private JButton btnAgregarPersona, btnAgregarLocalidad, btnAgregarTipoContacto;
+	private JButton btnAgregarContacto, btnLocalidadABM, btnTipoContactoABM;
 	private JComboBox<LocalidadDTO> inLocalidad;
 	private JComboBox <TipoContactoDTO> inTipoContacto;
 	
@@ -134,26 +134,23 @@ public class VentanaContactoAgregar extends JFrame {
 		cargarLocalidades();
 		cargarTiposDeContacto();
 
-		inTipoContacto.setBounds(columna2, fila4, 200, alto);
-		contenedor.add(inTipoContacto);
-		
 		// Los botones
-		btnAgregarPersona = new JButton("Agregar nuevo contacto");
-		btnAgregarTipoContacto = new JButton("Administrar");
-		btnAgregarLocalidad = new JButton("Administrar");
+		btnAgregarContacto = new JButton("Agregar nuevo contacto");
+		btnTipoContactoABM = new JButton("Administrar");
+		btnLocalidadABM = new JButton("Administrar");
 		
 		
-		btnAgregarPersona.addActionListener(this.controlador);
-		btnAgregarLocalidad.addActionListener(this.controlador);
-		btnAgregarTipoContacto.addActionListener(this.controlador);
+		btnAgregarContacto.addActionListener(this.controlador);
+		btnLocalidadABM.addActionListener(this.controlador);
+		btnTipoContactoABM.addActionListener(this.controlador);
 		
-		btnAgregarPersona.setBounds(140, fila9, 200, alto);
-		btnAgregarLocalidad.setBounds(columna3, fila5, 140, alto);
-		btnAgregarTipoContacto.setBounds(columna3, fila4, 140, alto);
+		btnAgregarContacto.setBounds(140, fila9, 200, alto);
+		btnLocalidadABM.setBounds(columna3, fila5, 140, alto);
+		btnTipoContactoABM.setBounds(columna3, fila4, 140, alto);
 
-		contenedor.add(btnAgregarPersona);
-		contenedor.add(btnAgregarTipoContacto);
-		contenedor.add(btnAgregarLocalidad);
+		contenedor.add(btnAgregarContacto);
+		contenedor.add(btnTipoContactoABM);
+		contenedor.add(btnLocalidadABM);
 		
 		this.setVisible(true);
 	}
@@ -162,14 +159,13 @@ public class VentanaContactoAgregar extends JFrame {
 		Agenda agenda = new Agenda(new DAOSQLFactory());
 		List<LocalidadDTO> localidades = agenda.obtenerLocalidades();
 		JComboBox<LocalidadDTO> lista = new JComboBox<LocalidadDTO>();
-
+		lista.setBounds(140, 130, 100, 20);
 		for (LocalidadDTO localidad : localidades)
 			lista.addItem(localidad);
 		
 		if (inLocalidad != null)
 			contenedor.remove(inLocalidad);
 		inLocalidad = lista;
-		inLocalidad.setBounds(140, 130, 200, 20);
 		contenedor.add(inLocalidad);
 	}
 	
@@ -177,11 +173,15 @@ public class VentanaContactoAgregar extends JFrame {
 		Agenda agenda = new Agenda(new DAOSQLFactory());
 		List<TipoContactoDTO> tipos = agenda.obtenerTiposDeContacto();
 		JComboBox<TipoContactoDTO> lista = new JComboBox<TipoContactoDTO>();
+		lista.setBounds(140, 100, 200, 20);
 
 		for (TipoContactoDTO tipo: tipos)
 			lista.addItem(tipo);
 		
+		if (inTipoContacto != null)
+			contenedor.remove(inTipoContacto);
 		inTipoContacto = lista;
+		contenedor.add(inTipoContacto);
 	}
 	
 	// GETTERS DE DATOS Y BOTONES
@@ -228,15 +228,15 @@ public class VentanaContactoAgregar extends JFrame {
 	}
 	
 	public JButton getBtnAgregarPersona() {
-		return btnAgregarPersona;
+		return btnAgregarContacto;
 	}
 
 	public JButton getBtnAgregarLocalidad() {
-		return btnAgregarLocalidad;
+		return btnLocalidadABM;
 	}
 	
 	public JButton getBtnAgregarTipoContacto() {
-		return btnAgregarTipoContacto;
+		return btnTipoContactoABM;
 	}
 
 }

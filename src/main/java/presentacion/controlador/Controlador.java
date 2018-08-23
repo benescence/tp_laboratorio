@@ -2,7 +2,10 @@ package presentacion.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
+
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.Vista;
@@ -40,8 +43,8 @@ public class Controlador implements ActionListener {
 		vista.getModelContactos().setColumnCount(0);
 		vista.getModelContactos().setColumnIdentifiers(vista.getNombreColumnas());
 
-		personas_en_tabla = agenda.obtenerPersonas();
-		
+		personas_en_tabla = agenda.obtenerPersonas();		
+		SimpleDateFormat formato = new SimpleDateFormat("d 'de' MMMM", new Locale("ES", "MX"));
 		for (int i = 0; i < personas_en_tabla.size(); i ++) {
 			Object[] fila = {
 					personas_en_tabla.get(i).getNombre(),
@@ -51,23 +54,23 @@ public class Controlador implements ActionListener {
 					personas_en_tabla.get(i).getNumero(),
 					personas_en_tabla.get(i).getPiso(),
 					personas_en_tabla.get(i).getDepto(),
-					personas_en_tabla.get(i).getLocalidad_id().toString(),
-					personas_en_tabla.get(i).getFecha_nacimiento().toString(),
-					personas_en_tabla.get(i).getTipo_contacto_id().toString()
+					agenda.obtenerDescripcionDeLocalidad(personas_en_tabla.get(i).getLocalidad_id()),
+					formato.format(personas_en_tabla.get(i).getFecha_nacimiento()),
+					agenda.obtenerDescripcionDeTipoDeContacto(personas_en_tabla.get(i).getTipo_contacto_id())
 					};
 			this.vista.getModelContactos().addRow(fila);		
 		}
-		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		// ************************************  BOTONES DE LA VISTA ******************************** 
 		
-		// boton agregar contacto de la vista principal
+		// AGREGAR CONTACTO
 		if(e.getSource() == this.vista.getBtnAgregar())	{
 			this.ventanaContactoAgregar = new VentanaContactoAgregar(this);
 		}
 		
-		// boton borrar contacto de la vista principal	
+		// BORRAR CONTACTO	
 		else if(e.getSource() == vista.getBtnBorrar()) {
 			int[] filas_seleccionadas = vista.getTablaContactos().getSelectedRows();
 			for (int fila:filas_seleccionadas)
@@ -76,7 +79,7 @@ public class Controlador implements ActionListener {
 			llenarTabla();
 		}
 
-		// boton editar contacto de la vista principal	
+		// MODIFICAR CONTACTO	
 		else if(e.getSource() == vista.getBtnModificar()) {
 			int[] filas_seleccionadas = vista.getTablaContactos().getSelectedRows();
 			if (filas_seleccionadas.length>0) {
@@ -85,17 +88,16 @@ public class Controlador implements ActionListener {
 			}
 		}
 
-		// boton generar reporte de la vista principal
+		// MOSTRAR REPORTE
 		else if(e.getSource() == vista.getBtnReporte()) {
 			ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonas());
 			reporte.mostrar();				
 		}
 		
 		
-		// BOTONES DE LA VISTA PERSONA (AGREGAR CONTACTO)
+		// ************************************  BOTONES DE LA VENTANA AGREGAR CONTACTO ******************************** 
 		if (ventanaContactoAgregar != null) {
-		
-		// boton agregar contacto de la vista persona
+			// AGREGAR CONTACTO
 			if(e.getSource() == ventanaContactoAgregar.getBtnAgregarPersona()) {
 				PersonaDTO nuevaPersona = new PersonaDTO(
 						-1,
@@ -115,36 +117,24 @@ public class Controlador implements ActionListener {
 				ventanaContactoAgregar.dispose();
 			}
 			
-			// boton agregar localidad de la vista persona
+			// ADMINISTRAR LOCALIDAD
 			else if(e.getSource() == ventanaContactoAgregar.getBtnAgregarLocalidad()) {
 				ventanaLocalidadABM = new VentanaLocalidadABM();
-				new ControladorLocalidadABM(ventanaLocalidadABM, agenda);
+				new ControladorLocalidadABM(ventanaLocalidadABM, ventanaContactoAgregar, agenda);
 			}
 			
-			// boton agregar tipo de contacto de la vista persona
+			// ADMINISTRAR TIPO DE CONTACTO
 			else if(e.getSource() == ventanaContactoAgregar.getBtnAgregarTipoContacto()) {
 				ventanaTipoContactoABM = new VentanaTipoContactoABM();
-				new ControladorTipoContactoABM(ventanaTipoContactoABM, agenda);
+				new ControladorTipoContactoABM(ventanaTipoContactoABM, ventanaContactoAgregar, agenda);
 			}
-			
-			
 		}
-		/*
-		// BOTONES DE LA VENTANA DE AGREGAR LOCALIDAD
-		if (ventanaLocalidad != null) {
-			if(e.getSource() == ventanaLocalidad.getBtnAgregarLocalidad()) {
-				LocalidadDTO localidad = new LocalidadDTO(-1, ventanaLocalidad.getDescripcion().getText());
-				agenda.agregarLocalidad(localidad);
-				ventanaPersona.cargarLocalidades();
-				ventanaLocalidad.dispose();
-			}
-		}		
-		*/
-		// BOTONES DE LA VENTANA DE EDITAR CONTACTO
+
+		// ************************************  BOTONES DE LA VENTANA MODIFICAR CONTACTO ********************************
 		if (ventanaEditarContacto != null) {
-			if(e.getSource() == ventanaEditarContacto.getBtnEditarContacto()) {
+			if(e.getSource() == ventanaEditarContacto.getBtnModificarContacto()) {
 				PersonaDTO contacto = new PersonaDTO(
-						ventanaEditarContacto.getPersonaOriginal().getPersona_id(),
+						ventanaEditarContacto.getContactoOriginal().getPersona_id(),
 						ventanaEditarContacto.getLocalidad().getLocalidad_id(),
 						ventanaEditarContacto.getTipoContacto().getTipo_contacto_id(),
 						ventanaEditarContacto.getNombre(),

@@ -20,11 +20,10 @@ import javax.swing.JComboBox;
 public class VentanaContactoModificar extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private Controlador controlador;
-	private JPanel contenedor_principal;
-	private JPanel panel;
+	private JPanel contenedor;
 	private JCalendar inFecha;
-	private JTextField inMail, inCalle, inDepto, inNum, inPiso, inTelefono, inNombre;
-	private JButton btnEditarContacto, btnAgregarLocalidad, btnAgregarTipoContacto;
+	private JTextField inEmail, inCalle, inDepto, inNumero, inPiso, inTelefono, inNombre;
+	private JButton btnModificarContacto, btnLocalidadABM, btnTipoContactoABM;
 	private JComboBox<LocalidadDTO> inLocalidad;
 	private JComboBox <TipoContactoDTO> inTipoContacto;
 	private PersonaDTO persona;
@@ -33,173 +32,172 @@ public class VentanaContactoModificar extends JFrame {
 		super();
 		this.controlador = controlador;
 		this.persona = persona;
-		System.out.println(persona.getNombre());
-		
+
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 814, 560);
-		contenedor_principal = new JPanel();
-		contenedor_principal.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contenedor_principal);
-		contenedor_principal.setLayout(null);
+		setBounds(100, 100, 520, 500);
+		contenedor = new JPanel();
+		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contenedor);
+		contenedor.setLayout(null);
 		
-		panel = new JPanel();
-		panel.setBounds(0, 11, 788, 499);
-		contenedor_principal.add(panel);
-		panel.setLayout(null);
-		
-		//Medidas de la ventana
-		int columna1 = 50;
-		int columna2 = 250;
-		int columna3 = 500;
-		
+		// Medidas de la ventana
+		int columna1 = 10;
+		int columna2 = 140;
+		int columna3 = 350;
 		int fila1 = 10;
-		int fila2 = 50;
-		int fila3 = 90;
-		int fila4 = 130;
-		int fila5 = 170;
-		int fila6 = 210;
-		int fila7 = 250;
-		int fila8 = 290;
-		int fila9 = 330;
+		int fila2 = 40;
+		int fila3 = 70;
+		int fila4 = 100;
+		int fila5 = 130;
+		int fila6 = 160;
+		int fila7 = 190;
+		int fila8 = 220;
+		int fila9 = 430;
 		
-		int anchoLabelGrande = 200;
+		int anchoLabelGrande = 120;
 		int anchoLabelChico = 50;
-		int anchoCajaGrande = 200;
-		int altoLabel = 15;
-		int altoCaja = 20;
+		int anchoCajaGrande = 350;
+		int anchoCajaChico = 100;
+		int alto = 20;
 
 		// Las etiquetas
 		JLabel lblNombre = new JLabel("Nombre y apellido");
-		JLabel lblTelefono = new JLabel("Telefono");
-		JLabel lblMail = new JLabel("Mail");
+		JLabel lblTelefono = new JLabel("Teléfono");
+		JLabel lblMail = new JLabel("E- Mail");
 		JLabel lblFecha = new JLabel("Fecha de nacimiento");
-		JLabel lblTipo = new JLabel("Tipo De Contacto");		
+		JLabel lblTipo = new JLabel("Tipo de contacto");		
 		JLabel lblCalle = new JLabel("Calle");
-		JLabel lblNum = new JLabel("N°");
+		JLabel lblNumero = new JLabel("Número");
 		JLabel lblPiso = new JLabel("Piso");
 		JLabel lblDepto = new JLabel("Depto");
 		JLabel lblLocalidad = new JLabel("Localidad");
 		
-		lblNombre.setBounds(  columna1, fila1, anchoLabelGrande, altoLabel);
-		lblTelefono.setBounds(columna1, fila2, anchoLabelGrande, altoLabel);
-		lblMail.setBounds(    columna1, fila3, anchoLabelGrande, altoLabel);
-		lblFecha.setBounds(   columna1, fila4, anchoLabelGrande, altoLabel);
-		lblTipo.setBounds(    columna1, fila5, anchoLabelGrande, altoLabel);
-		lblCalle.setBounds(    columna1, fila6, anchoLabelGrande, altoLabel);
-		lblNum.setBounds(     columna1, fila7, anchoLabelChico, altoLabel);
-		lblPiso.setBounds(    columna3+100, fila7, anchoLabelChico, altoLabel);
-		lblDepto.setBounds(   columna3+200, fila7, anchoLabelChico, altoLabel);
-		lblLocalidad.setBounds(   columna1, fila8, anchoLabelGrande, altoLabel);
+		lblNombre.setBounds(   columna1, fila1, anchoLabelGrande, alto);
+		lblTelefono.setBounds( columna1, fila2, anchoLabelGrande, alto);
+		lblMail.setBounds(     columna1, fila3, anchoLabelGrande, alto);
+		lblFecha.setBounds(    columna1, fila8, anchoLabelGrande, alto);
+		lblTipo.setBounds(     columna1, fila4, anchoLabelGrande, alto);
+		lblCalle.setBounds(    columna1, fila6, anchoLabelGrande, alto);
+		lblNumero.setBounds(   columna1, fila7, anchoLabelChico, alto);
+		lblPiso.setBounds(          180, fila7, anchoLabelChico, alto);
+		lblDepto.setBounds(         350, fila7, anchoLabelChico, alto);
+		lblLocalidad.setBounds(columna1, fila5, anchoLabelGrande, alto);
 
-		panel.add(lblNombre);
-		panel.add(lblTelefono);
-		panel.add(lblMail);
-		panel.add(lblFecha);
-		panel.add(lblTipo);
-		panel.add(lblCalle);
-		panel.add(lblNum);
-		panel.add(lblPiso);
-		panel.add(lblDepto);
-		panel.add(lblLocalidad);
+		contenedor.add(lblNombre);
+		contenedor.add(lblTelefono);
+		contenedor.add(lblMail);
+		contenedor.add(lblFecha);
+		contenedor.add(lblTipo);
+		contenedor.add(lblCalle);
+		contenedor.add(lblNumero);
+		contenedor.add(lblPiso);
+		contenedor.add(lblDepto);
+		contenedor.add(lblLocalidad);
 		
 		// Las cajas de texto
-		inMail = new JTextField();
+		inEmail = new JTextField();
 		inTelefono = new JTextField();
 		inFecha = new JCalendar();
 		inCalle = new JTextField();
 		inDepto = new JTextField();
-		inNum = new JTextField();
+		inNumero = new JTextField();
 		inPiso = new JTextField();
 		inNombre = new JTextField();
 		
+		inNombre.setText(persona.getNombre());
+		inEmail.setText(persona.getEmail());
+		inTelefono.setText(persona.getTelefono());
+		inCalle.setText(persona.getCalle());
+		inDepto.setText(persona.getDepto());
+		inNumero.setText(persona.getNumero());
+		inPiso.setText(persona.getPiso());
+	
 		inNombre.setColumns(10);
-		inMail.setColumns(10);
+		inEmail.setColumns(10);
 		inTelefono.setColumns(10);
 		inCalle.setColumns(10);
 		inDepto.setColumns(10);
-		inNum.setColumns(10);
+		inNumero.setColumns(10);
 		inPiso.setColumns(10);
 
-		inNombre.setBounds(  columna2, fila1, anchoCajaGrande, altoCaja);
-		inTelefono.setBounds(columna2, fila2, anchoCajaGrande, altoCaja);
-		inMail.setBounds(    columna2, fila3, anchoCajaGrande, altoCaja);
-		inFecha.setBounds(   columna2, fila4, anchoCajaGrande+200, altoCaja);
-		inCalle.setBounds(columna2, fila6, 110, 20);
-		inNum.setBounds(  columna2, fila7, 42, 20);
-		inPiso.setBounds( columna3+150, fila7, 42, 20);
-		inDepto.setBounds(columna3+250, fila7, 32, 20);
+		inNombre.setBounds(  columna2, fila1, anchoCajaGrande, alto);
+		inTelefono.setBounds(columna2, fila2, anchoCajaGrande, alto);
+		inEmail.setBounds(   columna2, fila3, anchoCajaGrande, alto);
+		inFecha.setBounds(   columna2, fila8, 200, 200);
+		inCalle.setBounds(   columna2, fila6, anchoCajaGrande, alto);
+		inNumero.setBounds(  70, fila7, anchoCajaChico, alto);
+		inPiso.setBounds(    230, fila7, anchoCajaChico, alto);
+		inDepto.setBounds(   390, fila7, anchoCajaChico, alto);
 
-		inNombre.setText(persona.getNombre());
-		inMail.setText(persona.getEmail());
-		inTelefono.setText(persona.getTelefono());
-		inCalle.setText(persona.getCalle());
-		inNum.setText(persona.getNumero());
-		inDepto.setText(persona.getNumero());
-		inPiso.setText(persona.getPiso());
-
-		panel.add(inNombre);
-		panel.add(inMail);
-		panel.add(inTelefono);
-		panel.add(inFecha);
-		panel.add(inCalle);
-		panel.add(inNum );
-		panel.add(inDepto);
-		panel.add(inPiso);
+		contenedor.add(inNombre);
+		contenedor.add(inEmail);
+		contenedor.add(inTelefono);
+		contenedor.add(inFecha);
+		contenedor.add(inCalle);
+		contenedor.add(inNumero );
+		contenedor.add(inDepto);
+		contenedor.add(inPiso);
 		
 		// Los desplegables
 		cargarLocalidades();
 		cargarTiposDeContacto();
 
-		inTipoContacto.setBounds(columna2, fila5, anchoCajaGrande, altoCaja);
-		panel.add(inTipoContacto);
-		
 		// Los botones
-		btnEditarContacto = new JButton("Agregar contacto");
-		btnAgregarTipoContacto = new JButton("...");
-		btnAgregarLocalidad = new JButton("...");
+		btnModificarContacto = new JButton("Agregar nuevo contacto");
+		btnTipoContactoABM = new JButton("Administrar");
+		btnLocalidadABM = new JButton("Administrar");
 		
+		btnModificarContacto.addActionListener(this.controlador);
+		btnLocalidadABM.addActionListener(this.controlador);
+		btnTipoContactoABM.addActionListener(this.controlador);
 		
-		btnEditarContacto.addActionListener(this.controlador);
-		btnAgregarLocalidad.addActionListener(this.controlador);
-		btnAgregarTipoContacto.addActionListener(this.controlador);
-		
-		btnEditarContacto.setBounds(columna3, fila9, anchoCajaGrande, altoCaja);
-		btnAgregarLocalidad.setBounds(columna3, fila8, anchoCajaGrande, altoCaja);
-		btnAgregarTipoContacto.setBounds(columna3, fila5, anchoCajaGrande, altoCaja);
+		btnModificarContacto.setBounds(140, fila9, 200, alto);
+		btnLocalidadABM.setBounds(columna3, fila5, 140, alto);
+		btnTipoContactoABM.setBounds(columna3, fila4, 140, alto);
 
-		panel.add(btnEditarContacto);
-		panel.add(btnAgregarTipoContacto);
-		panel.add(btnAgregarLocalidad);
+		contenedor.add(btnModificarContacto);
+		contenedor.add(btnTipoContactoABM);
+		contenedor.add(btnLocalidadABM);
 		
 		this.setVisible(true);
 	}
-	
+
 	public void cargarLocalidades() {
 		Agenda agenda = new Agenda(new DAOSQLFactory());
 		List<LocalidadDTO> localidades = agenda.obtenerLocalidades();
+		LocalidadDTO localidadActual = localidades.get(0);
 		JComboBox<LocalidadDTO> lista = new JComboBox<LocalidadDTO>();
-
-		for (LocalidadDTO localidad : localidades)
+		lista.setBounds(140, 130, 100, 20);
+		
+		for (LocalidadDTO localidad : localidades) {
 			lista.addItem(localidad);
+			if (localidad.getLocalidad_id() == persona.getLocalidad_id())
+				localidadActual = localidad;
+		}
 		
 		if (inLocalidad != null)
-			panel.remove(inLocalidad);
+			contenedor.remove(inLocalidad);
 		inLocalidad = lista;
-		inLocalidad.setBounds(250, 290, 200, 20);
-		panel.add(inLocalidad);
+		
+		inLocalidad.setSelectedItem(localidadActual);
+		contenedor.add(inLocalidad);
 	}
 	
 	public void cargarTiposDeContacto() {
 		Agenda agenda = new Agenda(new DAOSQLFactory());
 		List<TipoContactoDTO> tipos = agenda.obtenerTiposDeContacto();
 		JComboBox<TipoContactoDTO> lista = new JComboBox<TipoContactoDTO>();
+		lista.setBounds(140, 100, 200, 20);
 
 		for (TipoContactoDTO tipo: tipos)
 			lista.addItem(tipo);
 		
+		if (inTipoContacto != null)
+			contenedor.remove(inTipoContacto);
 		inTipoContacto = lista;
+		contenedor.add(inTipoContacto);
 	}
-	
+
 	// GETTERS DE DATOS Y BOTONES
 	public LocalidadDTO getLocalidad() {
 		return (LocalidadDTO)inLocalidad.getSelectedItem();
@@ -218,7 +216,7 @@ public class VentanaContactoModificar extends JFrame {
 	}
 	
 	public String getMail() {
-		return inMail.getText();
+		return inEmail.getText();
 	}
     
 	public String getCalle() {
@@ -226,7 +224,7 @@ public class VentanaContactoModificar extends JFrame {
 	}
 
 	public String getNumero() {
-		return inNum.getText();
+		return inNumero.getText();
 	}
 	
 	public String getPiso() {
@@ -243,20 +241,20 @@ public class VentanaContactoModificar extends JFrame {
 		return sqlDate;
 	}
 	
-	public JButton getBtnEditarContacto() {
-		return btnEditarContacto;
+	public PersonaDTO getContactoOriginal() {
+		return persona;
+	}
+	
+	public JButton getBtnModificarContacto() {
+		return btnModificarContacto;
 	}
 
 	public JButton getBtnAgregarLocalidad() {
-		return btnAgregarLocalidad;
+		return btnLocalidadABM;
 	}
 	
 	public JButton getBtnAgregarTipoContacto() {
-		return btnAgregarTipoContacto;
-	}
-	
-	public PersonaDTO getPersonaOriginal() {
-		return persona;
+		return btnTipoContactoABM;
 	}
 
 }

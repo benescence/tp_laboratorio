@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import modelo.Agenda;
+import presentacion.vista.contacto.VentanaContactoAgregar;
+import presentacion.vista.contacto.VentanaContactoModificar;
 import presentacion.vista.localidad.VentanaLocalidadABM;
 import presentacion.vista.localidad.VentanaLocalidadABMAgregar;
 import presentacion.vista.localidad.VentanaLocalidadABMModificar;
@@ -14,14 +16,28 @@ public class ControladorLocalidadABM implements ActionListener {
 	private VentanaLocalidadABM ventanaLocalidadABM;
 	private VentanaLocalidadABMAgregar ventanaLocalidadABMAgregar;
 	private VentanaLocalidadABMModificar ventanaLocalidadABMModificar;
+	private VentanaContactoAgregar ventanaContactoAgregar;
+	private VentanaContactoModificar ventanaContactoModificar;
 	private Agenda agenda;
 	
-	public ControladorLocalidadABM(VentanaLocalidadABM pVentanaLocalidadABM, Agenda pAgenda) {
-		ventanaLocalidadABM = pVentanaLocalidadABM;
-		agenda = pAgenda;
-		pVentanaLocalidadABM.getBtnAgregar().addActionListener(this);
-		pVentanaLocalidadABM.getBtnBorrar().addActionListener(this);
-		pVentanaLocalidadABM.getBtnModificar().addActionListener(this);
+	public ControladorLocalidadABM(VentanaLocalidadABM ventanaLocalidadABM, VentanaContactoAgregar ventanaContactoAgregar, Agenda agenda) {
+		this.ventanaLocalidadABM = ventanaLocalidadABM;
+		this.ventanaContactoAgregar = ventanaContactoAgregar;
+		this.agenda = agenda;
+		inicializar();
+	}
+	
+	public ControladorLocalidadABM(VentanaLocalidadABM ventanaLocalidadABM, VentanaContactoModificar ventanaContactoModificar, Agenda agenda) {
+		this.ventanaLocalidadABM = ventanaLocalidadABM;
+		this.ventanaContactoModificar = ventanaContactoModificar;
+		this.agenda = agenda;
+		inicializar();
+	}
+	
+	private void inicializar() {
+		ventanaLocalidadABM.getBtnAgregar().addActionListener(this);
+		ventanaLocalidadABM.getBtnBorrar().addActionListener(this);
+		ventanaLocalidadABM.getBtnModificar().addActionListener(this);
 		recargarTabla();
 	}
 	
@@ -34,12 +50,17 @@ public class ControladorLocalidadABM implements ActionListener {
 		for (LocalidadDTO localidad : localidades_en_tabla) {
 			Object[] fila = {localidad.getDescripcion()};
 			ventanaLocalidadABM.getModeloLocalidades().addRow(fila);
-		}		
+		}
+		
+		if (ventanaContactoAgregar != null)
+			ventanaContactoAgregar.cargarLocalidades();
+		
+		else if (ventanaContactoModificar != null)
+			ventanaContactoModificar.cargarLocalidades();
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-		
-		// BOTONES DEL ABM PRINCIPAL
+	public void actionPerformed(ActionEvent e) {		
+		// **********************  BOTONES DEL ABM PRINCIPAL *******************************
 		
 		// AGREGAR LOCALIDAD
 		if (e.getSource() == ventanaLocalidadABM.getBtnAgregar())	{

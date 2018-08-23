@@ -16,7 +16,7 @@ public class Vista {
 	private JTable tablaContactos;
 	private JButton btnAgregar, btnBorrar, btnModificar, btnReporte;
 	private DefaultTableModel modelContactos;
-	private String[] nombreColumnas = {"Nombre","Teléfono","E-mail","Calle","Número","Piso","Depto","Localidad","F.Nacimiento", "Tipo de contacto"};
+	private String[] nombreColumnas = {"Nombre","Teléfono","E-mail","Calle","Número","Piso","Depto","Localidad","Cumpleaños", "Tipo de contacto"};
 
 	public Vista() {
 		super();
@@ -43,7 +43,7 @@ public class Vista {
 		btnModificar = new JButton("Modificar contacto");
 		btnReporte = new JButton("Mostrar reporte");
 		
-		int fila = 280, ancho = 200, alto = 20;
+		int fila = 280, ancho = 200, alto = 25;
 		btnAgregar.setBounds(10, fila, ancho, alto);
 		btnBorrar.setBounds(280, fila, ancho, alto);
 		btnModificar.setBounds(550, fila, ancho, alto);		
