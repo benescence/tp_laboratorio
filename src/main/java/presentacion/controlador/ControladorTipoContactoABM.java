@@ -90,7 +90,7 @@ public class ControladorTipoContactoABM implements ActionListener {
 		// ********************** BOTONES DE LA VENTANA AGREGAR TIPO DE CONTACTO *******************************
 		if (ventanaTipoContactoABMAgregar != null) {
 			// AGREGAR TIPO DE CONTACTO
-			if(e.getSource() == ventanaTipoContactoABMAgregar.getBtnAgregar()) {
+			if(e.getSource() == ventanaTipoContactoABMAgregar.getBtnAgregar() && ventanaTipoContactoABMAgregar.validarInputs()) {
 				TipoContactoDTO TipoContacto = new TipoContactoDTO(-1, ventanaTipoContactoABMAgregar.getDescripcionDeTipoDeContacto());
 				agenda.agregarTipoDeContacto(TipoContacto);
 				recargarTabla();
@@ -101,7 +101,7 @@ public class ControladorTipoContactoABM implements ActionListener {
 		// ********************** BOTONES DE LA VENTANA MODIFICAR TIPO DE CONTACTO *******************************
 		if (ventanaTipoContactoABMModificar != null) {
 			// MODIFICAR TIPO DE CONTACTO
-			if(e.getSource() == ventanaTipoContactoABMModificar.getBtnModificar()) {
+			if(e.getSource() == ventanaTipoContactoABMModificar.getBtnModificar() && ventanaTipoContactoABMModificar.validarInputs()) {
 				TipoContactoDTO TipoContacto = new TipoContactoDTO(
 						ventanaTipoContactoABMModificar.getTipoDeContactoID(),
 						ventanaTipoContactoABMModificar.getDescripcionDeTipoDeContacto()

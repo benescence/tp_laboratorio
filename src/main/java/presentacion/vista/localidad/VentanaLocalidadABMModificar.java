@@ -3,12 +3,14 @@ package presentacion.vista.localidad;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import dto.LocalidadDTO;
 import presentacion.controlador.ControladorLocalidadABM;
+import presentacion.vista.util.Validador;
 
 public class VentanaLocalidadABMModificar extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -47,6 +49,21 @@ public class VentanaLocalidadABMModificar extends JFrame {
 		setVisible(true);
 	}
 		
+	public boolean validarInputs() {
+		String mensaje = "Su formulario contiene entradas invalidas:\n";
+		boolean isOk = true;
+		
+		if (!Validador.formatoNumeroLetraEspacio(inLocalidad.getText())) {
+			isOk = false;
+			mensaje += "    -La LOCALIDAD solo puede consistir de letras, numeros y espacios\n";
+		}
+		
+		if (!isOk)
+			JOptionPane.showMessageDialog(null, mensaje);
+		
+		return isOk;
+	}
+	
 	public String getDescripcionDeLocalidad() {
 		return inLocalidad.getText();
 	}

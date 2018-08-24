@@ -3,10 +3,12 @@ package presentacion.vista.tipocontacto;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import presentacion.controlador.ControladorTipoContactoABM;
+import presentacion.vista.util.Validador;
 
 public class VentanaTipoContactoABMAgregar extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -41,7 +43,22 @@ public class VentanaTipoContactoABMAgregar extends JFrame {
 		
 		setVisible(true);
 	}
+	
+	public boolean validarInputs() {
+		String mensaje = "Su formulario contiene entradas invalidas:\n";
+		boolean isOk = true;
 		
+		if (!Validador.formatoLetraEspacio(inTipoDeContacto.getText())) {
+			isOk = false;
+			mensaje += "    -El TIPO DE CONTACTO solo puede consistir de letras y espacios\n";
+		}
+		
+		if (!isOk)
+			JOptionPane.showMessageDialog(null, mensaje);
+		
+		return isOk;
+	}
+
 	public String getDescripcionDeTipoDeContacto() {
 		return inTipoDeContacto.getText();
 	}

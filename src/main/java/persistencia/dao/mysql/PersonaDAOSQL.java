@@ -42,7 +42,7 @@ public class PersonaDAOSQL implements PersonaDAO {
 			statement.setString(6, persona.getPiso());
 			statement.setString(7, persona.getDepto());
 			statement.setInt(8, persona.getLocalidad_id());
-			statement.setDate(9, persona.getFecha_nacimiento());
+			statement.setDate(9, persona.getCumple());
 			statement.setInt(10, persona.getTipo_contacto_id());
 			
 			if(statement.executeUpdate() > 0)

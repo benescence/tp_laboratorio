@@ -5,10 +5,10 @@ import java.sql.Date;
 public class PersonaDTO {
 	private Integer persona_id, localidad_id, tipo_contacto_id;
 	private String nombre, telefono, email, calle, numero, piso, depto;
-	private Date fecha_nacimiento;
+	private Date cumple;
 	
 	public PersonaDTO(int persona_id, int localidad_id, int tipo_contacto_id, String nombre, String telefono,
-			String email, String calle, String numero, String piso, String depto, Date fecha_nacimiento) {
+			String email, String calle, String numero, String piso, String depto, Date cumple) {
 		this.persona_id = persona_id;
 		this.localidad_id = localidad_id;
 		this.tipo_contacto_id = tipo_contacto_id;
@@ -19,7 +19,7 @@ public class PersonaDTO {
 		this.numero = numero;
 		this.piso = piso;
 		this.depto = depto;
-		this.fecha_nacimiento = fecha_nacimiento;
+		this.cumple = cumple;
 	}
 
 	public Integer getPersona_id() {
@@ -102,12 +102,12 @@ public class PersonaDTO {
 		this.depto = depto;
 	}
 
-	public Date getFecha_nacimiento() {
-		return fecha_nacimiento;
+	public Date getCumple() {
+		return cumple;
 	}
 
-	public void setFecha_nacimiento(Date fecha_nacimiento) {
-		this.fecha_nacimiento = fecha_nacimiento;
+	public void setCumple(Date cumple) {
+		this.cumple = cumple;
 	}
 
 }

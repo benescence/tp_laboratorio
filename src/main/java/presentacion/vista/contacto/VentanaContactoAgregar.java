@@ -5,17 +5,17 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import com.toedter.calendar.JCalendar;
-
 import dto.LocalidadDTO;
 import dto.TipoContactoDTO;
 import modelo.Agenda;
 import persistencia.dao.mysql.DAOSQLFactory;
 import presentacion.controlador.Controlador;
+import presentacion.vista.util.Validador;
 import javax.swing.JComboBox;
 
 public class VentanaContactoAgregar extends JFrame {
@@ -64,7 +64,7 @@ public class VentanaContactoAgregar extends JFrame {
 		JLabel lblNombre = new JLabel("Nombre y apellido");
 		JLabel lblTelefono = new JLabel("Teléfono");
 		JLabel lblMail = new JLabel("E- Mail");
-		JLabel lblFecha = new JLabel("Fecha de nacimiento");
+		JLabel lblFecha = new JLabel("Fecha de cumpleaños");
 		JLabel lblTipo = new JLabel("Tipo de contacto");		
 		JLabel lblCalle = new JLabel("Calle");
 		JLabel lblNumero = new JLabel("Número");
@@ -144,7 +144,7 @@ public class VentanaContactoAgregar extends JFrame {
 		btnLocalidadABM.addActionListener(this.controlador);
 		btnTipoContactoABM.addActionListener(this.controlador);
 		
-		btnAgregarContacto.setBounds(140, fila9, 200, alto);
+		btnAgregarContacto.setBounds(140, fila9, 200, 25);
 		btnLocalidadABM.setBounds(columna3, fila5, 140, alto);
 		btnTipoContactoABM.setBounds(columna3, fila4, 140, alto);
 
@@ -159,7 +159,7 @@ public class VentanaContactoAgregar extends JFrame {
 		Agenda agenda = new Agenda(new DAOSQLFactory());
 		List<LocalidadDTO> localidades = agenda.obtenerLocalidades();
 		JComboBox<LocalidadDTO> lista = new JComboBox<LocalidadDTO>();
-		lista.setBounds(140, 130, 100, 20);
+		lista.setBounds(140, 130, 200, 20);
 		for (LocalidadDTO localidad : localidades)
 			lista.addItem(localidad);
 		
@@ -182,6 +182,51 @@ public class VentanaContactoAgregar extends JFrame {
 			contenedor.remove(inTipoContacto);
 		inTipoContacto = lista;
 		contenedor.add(inTipoContacto);
+	}
+	
+	public boolean validarInputs() {
+		String mensaje = "Su formulario contiene entradas invalidas:\n";
+		boolean isOk = true;
+		
+		if (!Validador.formatoLetraEspacio(inNombre.getText())) {
+			isOk = false;
+			mensaje += "    -El NOMBRE solo puede consistir de letras y espacios\n";
+		}
+
+		if (!Validador.formatoNumeroLetraEspacio(inCalle.getText())) {
+			isOk = false;
+			mensaje += "    -La CALLE solo puede consistir de letras, numeros y espacios\n";
+		}
+
+		if (!Validador.formatoNumero(inTelefono.getText())) {
+			isOk = false;
+			mensaje += "    -El TELEFONO solo puede consistir de numeros\n";
+		}
+		
+		if (!Validador.formatoNumero(inNumero.getText())) {
+			isOk = false;
+			mensaje += "    -El NUMERO solo puede consistir de numeros\n";
+		}
+		
+		if (!Validador.formatoNumero(inPiso.getText())) {
+			isOk = false;
+			mensaje += "    -El PISO solo puede consistir de numeros\n";
+		}
+
+		if (!Validador.formatoNumeroLetraEspacio(inDepto.getText())) {
+			isOk = false;
+			mensaje += "    -El DEPTO solo puede consistir de letras, numeros y espacios\n";
+		}
+		
+		if (!Validador.formatoMail(inEmail.getText())) {
+			isOk = false;
+			mensaje += "    -El E-MAIL debe tener la forma A1@A1 (A1 representa uno o mas numeros o letras\n";
+		}
+
+		if (!isOk)
+			JOptionPane.showMessageDialog(null, mensaje);
+		
+		return isOk;
 	}
 	
 	// GETTERS DE DATOS Y BOTONES
@@ -227,15 +272,15 @@ public class VentanaContactoAgregar extends JFrame {
 		return sqlDate;
 	}
 	
-	public JButton getBtnAgregarPersona() {
+	public JButton getBtnAgregarContacto() {
 		return btnAgregarContacto;
 	}
 
-	public JButton getBtnAgregarLocalidad() {
+	public JButton getBtnLocalidadABM() {
 		return btnLocalidadABM;
 	}
 	
-	public JButton getBtnAgregarTipoContacto() {
+	public JButton getBtnTipoContactoABM() {
 		return btnTipoContactoABM;
 	}
 

@@ -89,7 +89,7 @@ public class ControladorLocalidadABM implements ActionListener {
 		// BOTONES DE LA VENTANA AGREGAR LOCALIDAD
 		if (ventanaLocalidadABMAgregar != null) {
 			// AGREGAR LOCALIDAD
-			if(e.getSource() == ventanaLocalidadABMAgregar.getBtnAgregar()) {
+			if(e.getSource() == ventanaLocalidadABMAgregar.getBtnAgregar() && ventanaLocalidadABMAgregar.validarInputs()) {
 				LocalidadDTO localidad = new LocalidadDTO(-1, ventanaLocalidadABMAgregar.getDescripcionDeLocalidad());
 				agenda.agregarLocalidad(localidad);
 				recargarTabla();
@@ -100,7 +100,7 @@ public class ControladorLocalidadABM implements ActionListener {
 		// BOTONES DE LA VENTANA MODIFICAR LOCALIDAD
 		if (ventanaLocalidadABMModificar != null) {
 			// MODIFICAR LOCALIDAD
-			if(e.getSource() == ventanaLocalidadABMModificar.getBtnModificar()) {
+			if(e.getSource() == ventanaLocalidadABMModificar.getBtnModificar() && ventanaLocalidadABMModificar.validarInputs()) {
 				LocalidadDTO localidad = new LocalidadDTO(
 						ventanaLocalidadABMModificar.getLocalidadID(),
 						ventanaLocalidadABMModificar.getDescripcionDeLocalidad()

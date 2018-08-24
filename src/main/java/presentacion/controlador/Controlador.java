@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
-
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.Vista;
@@ -21,7 +20,7 @@ public class Controlador implements ActionListener {
 	private VentanaContactoAgregar ventanaContactoAgregar;
 	private VentanaLocalidadABM ventanaLocalidadABM;
 	private VentanaTipoContactoABM ventanaTipoContactoABM;
-	private VentanaContactoModificar ventanaEditarContacto;
+	private VentanaContactoModificar ventanaModificarContacto;
 	private Agenda agenda;
 	
 	public Controlador(Vista vista, Agenda agenda) {
@@ -55,7 +54,7 @@ public class Controlador implements ActionListener {
 					personas_en_tabla.get(i).getPiso(),
 					personas_en_tabla.get(i).getDepto(),
 					agenda.obtenerDescripcionDeLocalidad(personas_en_tabla.get(i).getLocalidad_id()),
-					formato.format(personas_en_tabla.get(i).getFecha_nacimiento()),
+					formato.format(personas_en_tabla.get(i).getCumple()),
 					agenda.obtenerDescripcionDeTipoDeContacto(personas_en_tabla.get(i).getTipo_contacto_id())
 					};
 			this.vista.getModelContactos().addRow(fila);		
@@ -83,8 +82,8 @@ public class Controlador implements ActionListener {
 		else if(e.getSource() == vista.getBtnModificar()) {
 			int[] filas_seleccionadas = vista.getTablaContactos().getSelectedRows();
 			if (filas_seleccionadas.length>0) {
-				PersonaDTO persona = personas_en_tabla.get(0);
-				ventanaEditarContacto = new VentanaContactoModificar(this, persona);
+				PersonaDTO persona = personas_en_tabla.get(filas_seleccionadas[0]);
+				ventanaModificarContacto = new VentanaContactoModificar(this, persona);
 			}
 		}
 
@@ -98,7 +97,7 @@ public class Controlador implements ActionListener {
 		// ************************************  BOTONES DE LA VENTANA AGREGAR CONTACTO ******************************** 
 		if (ventanaContactoAgregar != null) {
 			// AGREGAR CONTACTO
-			if(e.getSource() == ventanaContactoAgregar.getBtnAgregarPersona()) {
+			if(e.getSource() == ventanaContactoAgregar.getBtnAgregarContacto() && ventanaContactoAgregar.validarInputs()) {
 				PersonaDTO nuevaPersona = new PersonaDTO(
 						-1,
 						ventanaContactoAgregar.getLocalidad().getLocalidad_id(),
@@ -118,40 +117,53 @@ public class Controlador implements ActionListener {
 			}
 			
 			// ADMINISTRAR LOCALIDAD
-			else if(e.getSource() == ventanaContactoAgregar.getBtnAgregarLocalidad()) {
+			else if(e.getSource() == ventanaContactoAgregar.getBtnLocalidadABM()) {
 				ventanaLocalidadABM = new VentanaLocalidadABM();
 				new ControladorLocalidadABM(ventanaLocalidadABM, ventanaContactoAgregar, agenda);
 			}
 			
 			// ADMINISTRAR TIPO DE CONTACTO
-			else if(e.getSource() == ventanaContactoAgregar.getBtnAgregarTipoContacto()) {
+			else if(e.getSource() == ventanaContactoAgregar.getBtnTipoContactoABM()) {
 				ventanaTipoContactoABM = new VentanaTipoContactoABM();
 				new ControladorTipoContactoABM(ventanaTipoContactoABM, ventanaContactoAgregar, agenda);
 			}
 		}
 
 		// ************************************  BOTONES DE LA VENTANA MODIFICAR CONTACTO ********************************
-		if (ventanaEditarContacto != null) {
-			if(e.getSource() == ventanaEditarContacto.getBtnModificarContacto()) {
+		if (ventanaModificarContacto != null) {
+			// MODIFICAR CONTACTO
+			if(e.getSource() == ventanaModificarContacto.getBtnModificarContacto() && ventanaModificarContacto.validarInputs()) {
 				PersonaDTO contacto = new PersonaDTO(
-						ventanaEditarContacto.getContactoOriginal().getPersona_id(),
-						ventanaEditarContacto.getLocalidad().getLocalidad_id(),
-						ventanaEditarContacto.getTipoContacto().getTipo_contacto_id(),
-						ventanaEditarContacto.getNombre(),
-						ventanaEditarContacto.getTelefono(),
-						ventanaEditarContacto.getMail(),
-						ventanaEditarContacto.getCalle(),
-						ventanaEditarContacto.getNumero(),
-						ventanaEditarContacto.getPiso(),
-						ventanaEditarContacto.getDepto(),
-						ventanaEditarContacto.getFecha()
+						ventanaModificarContacto.getContactoOriginal().getPersona_id(),
+						ventanaModificarContacto.getLocalidad().getLocalidad_id(),
+						ventanaModificarContacto.getTipoContacto().getTipo_contacto_id(),
+						ventanaModificarContacto.getNombre(),
+						ventanaModificarContacto.getTelefono(),
+						ventanaModificarContacto.getMail(),
+						ventanaModificarContacto.getCalle(),
+						ventanaModificarContacto.getNumero(),
+						ventanaModificarContacto.getPiso(),
+						ventanaModificarContacto.getDepto(),
+						ventanaModificarContacto.getFecha()
 						);
 				agenda.modificarPersona(contacto);
 				llenarTabla();
-				ventanaEditarContacto.dispose();
+				ventanaModificarContacto.dispose();
+			}
+			
+			// ADMINISTRAR LOCALIDAD
+			else if(e.getSource() == ventanaModificarContacto.getBtnLocalidadABM()) {
+				ventanaLocalidadABM = new VentanaLocalidadABM();
+				new ControladorLocalidadABM(ventanaLocalidadABM, ventanaModificarContacto, agenda);
+			}
+			
+			// ADMINISTRAR TIPO DE CONTACTO
+			else if(e.getSource() == ventanaModificarContacto.getBtnTipoContactoABM()) {
+				ventanaTipoContactoABM = new VentanaTipoContactoABM();
+				new ControladorTipoContactoABM(ventanaTipoContactoABM, ventanaModificarContacto, agenda);
 			}
 		}
-		
+
 	}
 	
 }
