@@ -44,21 +44,18 @@
 	<group name="Mes">
 		<groupExpression><![CDATA[MONTH($F{cumple} )]]></groupExpression>
 		<groupHeader>
-			<band height="122">
-				<frame>
-					<reportElement x="16" y="0" width="500" height="40" uuid="91b48845-f53e-43d2-a012-ca3414dbabfd"/>
-					<textField>
-						<reportElement x="48" y="14" width="100" height="30" uuid="1980000d-0fa7-4122-9aef-4574160905e7"/>
-						<textFieldExpression><![CDATA[" mes : " +MONTH($F{cumple} )]]></textFieldExpression>
-					</textField>
-				</frame>
+			<band height="30">
+				<textField>
+					<reportElement x="0" y="0" width="200" height="25" uuid="1980000d-0fa7-4122-9aef-4574160905e7"/>
+					<textFieldExpression><![CDATA[" mes : " +MONTH($F{cumple} )]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="54">
+			<band height="30">
 				<textField>
-					<reportElement x="415" y="24" width="100" height="30" uuid="10ffd9b0-848a-4446-8495-39abe3fa5e9e"/>
-					<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+					<reportElement x="380" y="0" width="170" height="26" uuid="10ffd9b0-848a-4446-8495-39abe3fa5e9e"/>
+					<textFieldExpression><![CDATA[$V{Mes_COUNT} + " registros"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -90,7 +87,7 @@
 	<pageHeader>
 		<band height="72" splitType="Stretch">
 			<frame>
-				<reportElement x="30" y="21" width="500" height="30" uuid="cfc19371-e1b5-4e43-b06a-1cbf2bfb8d4c"/>
+				<reportElement x="30" y="21" width="500" height="29" uuid="cfc19371-e1b5-4e43-b06a-1cbf2bfb8d4c"/>
 				<staticText>
 					<reportElement mode="Transparent" x="0" y="-11" width="374" height="32" forecolor="#5035E8" uuid="96630f52-8958-4322-8177-2fca8177c4af"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -105,76 +102,116 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="58" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<frame>
-				<reportElement x="0" y="0" width="470" height="50" uuid="c0c0b4b2-da6e-4752-8273-0aec158686b0"/>
+				<reportElement x="-5" y="-10" width="470" height="29" uuid="c0c0b4b2-da6e-4752-8273-0aec158686b0"/>
 				<staticText>
-					<reportElement x="344" y="0" width="100" height="30" uuid="004e73b9-4411-4b4c-9de1-722ef0ad79b3">
+					<reportElement positionType="Float" x="200" y="0" width="100" height="25" uuid="004e73b9-4411-4b4c-9de1-722ef0ad79b3">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ef8e8d06-a209-47b9-b8e9-2df52197ded0"/>
 					</reportElement>
 					<textElement>
-						<font fontName="DejaVu Sans" size="14"/>
+						<font fontName="Calibri" size="14"/>
 						<paragraph lineSpacing="Double"/>
 					</textElement>
 					<text><![CDATA[fecha]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="40" y="0" width="100" height="30" uuid="76aa93a6-1a46-4132-8f92-ed7d8d2e6c15">
+					<reportElement positionType="Float" x="0" y="0" width="100" height="25" uuid="76aa93a6-1a46-4132-8f92-ed7d8d2e6c15">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4512e66c-f4ed-4a0e-a04d-779db019213c"/>
 					</reportElement>
 					<textElement>
-						<font fontName="DejaVu Sans" size="16"/>
+						<font fontName="Calibri" size="14"/>
 					</textElement>
 					<text><![CDATA[nombre]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="180" y="0" width="100" height="30" uuid="16567052-848b-4f4d-aadd-b3ea0dc1f7f2">
+					<reportElement positionType="Float" x="100" y="0" width="100" height="25" uuid="16567052-848b-4f4d-aadd-b3ea0dc1f7f2">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="94266640-58d5-4b42-98a1-a63dcd52cd58"/>
 					</reportElement>
 					<textElement>
-						<font fontName="DejaVu Sans" size="16"/>
+						<font fontName="Calibri" size="14"/>
 					</textElement>
 					<text><![CDATA[telefono]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="300" y="0" width="100" height="25" uuid="91e47394-b031-4a48-b9b3-24d74ba729e7">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9af54c7d-c925-42a9-93e6-5041dfed713e"/>
+					</reportElement>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<text><![CDATA[email]]></text>
 				</staticText>
 			</frame>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="150" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<textField>
-				<reportElement x="210" y="70" width="100" height="30" uuid="8357834c-eb18-4ca9-932d-5f13e42558fc">
+				<reportElement positionType="Float" x="100" y="0" width="100" height="25" uuid="8357834c-eb18-4ca9-932d-5f13e42558fc">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="94266640-58d5-4b42-98a1-a63dcd52cd58"/>
 				</reportElement>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Calibri" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="360" y="70" width="100" height="30" uuid="5a9ce34b-9a7f-45c5-8409-0999a6b78d98">
+				<reportElement positionType="Float" x="200" y="0" width="100" height="25" uuid="5a9ce34b-9a7f-45c5-8409-0999a6b78d98">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ef8e8d06-a209-47b9-b8e9-2df52197ded0"/>
 				</reportElement>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Calibri" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cumple}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="56" y="70" width="100" height="30" uuid="34424092-9aea-4f82-a444-5eadb4840e53">
+				<reportElement positionType="Float" x="0" y="0" width="100" height="25" uuid="34424092-9aea-4f82-a444-5eadb4840e53">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4512e66c-f4ed-4a0e-a04d-779db019213c"/>
 				</reportElement>
 				<textElement>
-					<font size="14"/>
+					<font fontName="Calibri" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="300" y="0" width="100" height="25" uuid="adb8cba7-38bd-438f-b363-9cfe4cc79bf9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9af54c7d-c925-42a9-93e6-5041dfed713e"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Calibri" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<summary>
 		<band height="292" splitType="Stretch">
-			<frame>
-				<reportElement x="140" y="-10" width="393" height="292" uuid="55137812-47d1-4fdb-8016-8c46db6c78ad"/>
-			</frame>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="130" y="50" width="200" height="200" uuid="52ee168e-1b55-4de6-8f12-a19b45fb005f"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset maxCount="12" minPercentage="1.0">
+					<dataset incrementType="Group" incrementGroup="Mes"/>
+					<keyExpression><![CDATA[MONTH( $F{cumple})]]></keyExpression>
+					<valueExpression><![CDATA[MONTH( $F{cumple})]]></valueExpression>
+					<labelExpression><![CDATA[DATEFORMAT($F{cumple} ,"MMMM")]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<staticText>
+				<reportElement x="190" y="11" width="100" height="30" uuid="18ab5293-b1b6-43fa-b5c0-846057db3fca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="16"/>
+				</textElement>
+				<text><![CDATA[Contactos por mes]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>
