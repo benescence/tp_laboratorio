@@ -1,3 +1,6 @@
-/META-INF/
-/presentacion/
+/dto/
+/main/
+/modelo/
 /persistencia/
+/presentacion/
+/META-INF/

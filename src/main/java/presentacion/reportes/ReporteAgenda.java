@@ -20,9 +20,11 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class ReporteAgenda {
 	private JasperReport reporte;
-	private JasperViewer reporteViewer;
+	
 	private JasperPrint	reporteLleno;
 	private Logger log = Logger.getLogger(ReporteAgenda.class);
+
+	private JasperViewer reporteViewer;
 	
 	//Recibe la lista de personas para armar el reporte
     public ReporteAgenda(List<PersonaDTO> personas) {
