@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteporMesdeNacimiento" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7e32e8d2-f8eb-4a39-9949-d123dcf452d7">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="prueba"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[select * from personas where fecha_nacimiento <= '2018-01-31' and fecha_nacimiento > '2017-12-31';]]>
+	</queryString>
+	<field name="persona_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="persona_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+		<fieldDescription><![CDATA[nombre]]></fieldDescription>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="telefono"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+		<fieldDescription><![CDATA[telefono]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+		<fieldDescription><![CDATA[email]]></fieldDescription>
+	</field>
+	<field name="calle" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="calle"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+	</field>
+	<field name="numero" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="numero"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+	</field>
+	<field name="piso" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="piso"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+	</field>
+	<field name="depto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="depto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+	</field>
+	<field name="fecha_nacimiento" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="fecha_nacimiento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+	</field>
+	<field name="localidad_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="localidad_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+	</field>
+	<field name="tipo_contacto_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="tipo_contacto_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="106" splitType="Stretch">
+			<staticText>
+				<reportElement x="54" y="20" width="490" height="50" uuid="a8a097b5-441a-4dfd-98f7-c985fe384743"/>
+				<textElement>
+					<font fontName="Calibri" size="30"/>
+				</textElement>
+				<text><![CDATA[Contactos segun su mes de nacimiento ]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="40" y="0" width="515" height="106" uuid="3e661872-88b9-42cb-a922-8a847e30f7c4"/>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="72" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="160" height="30" uuid="167b07a1-89da-4294-961e-2e6cc7e7c225"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Contactos registrados : ]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="-10" y="0" width="200" height="39" uuid="31c55e2c-3ef8-435d-9785-ba6a315f1b3b"/>
+			</frame>
+			<image>
+				<reportElement x="390" y="-9" width="140" height="81" uuid="90f4bb19-f8a8-4e86-8730-a6ef98a07697"/>
+				<imageExpression><![CDATA["src/main/resources/LogoNuevoUNGS.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="80" splitType="Stretch">
+			<frame>
+				<reportElement x="20" y="0" width="290" height="80" uuid="32492cbe-78b6-4be7-bd36-ce88ba4448bd"/>
+				<staticText>
+					<reportElement x="0" y="20" width="100" height="30" uuid="71489f2c-fe86-4e67-b99b-4e7d982ea37b"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Nombre y Apellido]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="115" y="20" width="61" height="30" uuid="cf591dba-fffa-4bd5-9829-39de92516319"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Telefono]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="190" y="20" width="100" height="30" uuid="c9b117c8-30ff-4785-bb73-07a6d769c833"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[e mail]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="239" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="239" uuid="6dfbb067-0341-4366-b415-6d8e8a643546"/>
+				<frame>
+					<reportElement x="10" y="0" width="400" height="80" uuid="6f9c1448-2526-4dae-bdbb-5f323bb6c18f"/>
+					<textField>
+						<reportElement x="12" y="40" width="100" height="30" uuid="68c94946-3330-4d97-94d5-9d831430f44d"/>
+						<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="129" y="40" width="61" height="30" uuid="bacc1891-96a4-431f-b294-d37494bfb6af"/>
+						<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="205" y="40" width="90" height="30" uuid="a26db9e4-edf4-40f7-a9fd-835a5146e95f"/>
+						<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="8" y="0" width="104" height="30" uuid="d210755e-0d70-4496-82bb-85e41049408c"/>
+						<textElement>
+							<font fontName="Calibri" size="16"/>
+						</textElement>
+						<text><![CDATA[Enero]]></text>
+					</staticText>
+				</frame>
+			</frame>
+		</band>
+	</detail>
+	<summary>
+		<band height="323" splitType="Stretch"/>
+	</summary>
+</jasperReport>
