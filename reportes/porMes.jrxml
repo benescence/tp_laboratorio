@@ -5,28 +5,120 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
+	<field name="telefono" class="java.lang.String">
+		<fieldDescription><![CDATA[telefono]]></fieldDescription>
+	</field>
+	<field name="cumple" class="java.sql.Date">
+		<fieldDescription><![CDATA[cumple]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[nombre]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[email]]></fieldDescription>
+	</field>
+	<variable name="cumple1" class="java.lang.Integer" resetType="Group" resetGroup="Enero" calculation="Count">
+		<variableExpression><![CDATA[$F{cumple}]]></variableExpression>
+	</variable>
+	<variable name="nombre1" class="java.lang.Integer" resetType="Group" resetGroup="Enero" calculation="Count">
+		<variableExpression><![CDATA[$F{nombre}]]></variableExpression>
+	</variable>
+	<variable name="cumple2" class="java.lang.Integer" resetType="Group" resetGroup="Enero" calculation="Count">
+		<variableExpression><![CDATA[$F{cumple}]]></variableExpression>
+	</variable>
+	<variable name="cumple3" class="java.lang.Integer" resetType="Group" resetGroup="Enero" calculation="Count">
+		<variableExpression><![CDATA[$F{cumple}]]></variableExpression>
+	</variable>
+	<variable name="nombre2" class="java.lang.Integer" resetType="Group" resetGroup="Enero" calculation="Count">
+		<variableExpression><![CDATA[$F{nombre}]]></variableExpression>
+	</variable>
+	<group name="Enero">
+		<groupExpression><![CDATA[$F{cumple}]]></groupExpression>
+		<groupHeader>
+			<band height="57">
+				<staticText>
+					<reportElement x="16" y="10" width="100" height="30" uuid="3921d364-b78b-4859-a311-f9085a933868"/>
+					<text><![CDATA[Enero]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="140" splitType="Stretch">
+			<frame>
+				<reportElement x="20" y="20" width="260" height="110" uuid="feab0a51-a0c9-4773-8369-dea0d3baed36"/>
+				<staticText>
+					<reportElement x="20" y="20" width="169" height="30" uuid="5067cd7c-555f-423c-937a-ce681d5bff83"/>
+					<text><![CDATA[Reporte por mes - agenda ]]></text>
+				</staticText>
+			</frame>
+		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="72" splitType="Stretch">
+			<frame>
+				<reportElement x="16" y="27" width="500" height="30" uuid="cfc19371-e1b5-4e43-b06a-1cbf2bfb8d4c"/>
+				<staticText>
+					<reportElement x="10" y="0" width="237" height="30" uuid="96630f52-8958-4322-8177-2fca8177c4af"/>
+					<text><![CDATA[Contactos segun su mes de cumpleaños ]]></text>
+				</staticText>
+			</frame>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="344" y="0" width="100" height="30" uuid="004e73b9-4411-4b4c-9de1-722ef0ad79b3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ef8e8d06-a209-47b9-b8e9-2df52197ded0"/>
+				</reportElement>
+				<text><![CDATA[email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="0" width="100" height="30" uuid="76aa93a6-1a46-4132-8f92-ed7d8d2e6c15">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4512e66c-f4ed-4a0e-a04d-779db019213c"/>
+				</reportElement>
+				<text><![CDATA[nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="100" height="30" uuid="16567052-848b-4f4d-aadd-b3ea0dc1f7f2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="94266640-58d5-4b42-98a1-a63dcd52cd58"/>
+				</reportElement>
+				<text><![CDATA[telefono]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="0" y="0" width="470" height="50" uuid="c0c0b4b2-da6e-4752-8273-0aec158686b0"/>
+			</frame>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="240" splitType="Stretch">
+			<textField>
+				<reportElement x="180" y="10" width="100" height="30" uuid="09456ea5-b777-4f5c-a527-578e8b91eb38">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="94266640-58d5-4b42-98a1-a63dcd52cd58"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="10" width="100" height="30" uuid="d23940a2-92bd-4d57-aa66-35773dc155be">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ef8e8d06-a209-47b9-b8e9-2df52197ded0"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="10" width="100" height="30" uuid="9fc47dfa-f58a-46d1-a1a3-a4c34f084d5a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4512e66c-f4ed-4a0e-a04d-779db019213c"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement x="16" y="0" width="500" height="40" uuid="9a1c555e-cbf9-4f6f-9c37-b5539f87adb4"/>
+			</frame>
+		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="151" splitType="Stretch"/>
 	</summary>
 </jasperReport>
