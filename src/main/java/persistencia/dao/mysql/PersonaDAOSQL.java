@@ -5,17 +5,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import persistencia.conexion.Conexion;
+
+import persistencia.Conexion;
 import persistencia.dao.interfaz.PersonaDAO;
-import dto.PersonaDTO;
+import persistencia.dto.PersonaDTO;
 
 public class PersonaDAOSQL implements PersonaDAO {
-	private static final String insert = "INSERT INTO personas(nombre, telefono, email, calle, numero, piso, depto, localidad_id, fecha_nacimiento, tipo_contacto_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String insert = "INSERT INTO personas(nombre, apellido, telefono, email, calle, numero, piso, depto, localidad_id, cumple, tipo_contacto_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE persona_id = ?";
 	private static final String readall = "SELECT * FROM personas";
 	private static final String update = "UPDATE personas\r\n" + 
 			"SET\r\n" + 
 			"nombre = ?,\r\n" + 
+			"apellido = ?,\r\n" + 
 			"telefono = ?,\r\n" + 
 			"email = ?,\r\n" + 
 			"calle = ?,\r\n" + 
@@ -35,15 +37,16 @@ public class PersonaDAOSQL implements PersonaDAO {
 		try {
 			statement = conexion.getSQLConexion().prepareStatement(insert);
 			statement.setString(1, persona.getNombre());
-			statement.setString(2, persona.getTelefono());
-			statement.setString(3, persona.getEmail());
-			statement.setString(4, persona.getCalle());
-			statement.setString(5, persona.getNumero());
-			statement.setString(6, persona.getPiso());
-			statement.setString(7, persona.getDepto());
-			statement.setInt(8, persona.getLocalidad_id());
-			statement.setDate(9, persona.getCumple());
-			statement.setInt(10, persona.getTipo_contacto_id());
+			statement.setString(2, persona.getApellido());
+			statement.setString(3, persona.getTelefono());
+			statement.setString(4, persona.getEmail());
+			statement.setString(5, persona.getCalle());
+			statement.setString(6, persona.getNumero());
+			statement.setString(7, persona.getPiso());
+			statement.setString(8, persona.getDepto());
+			statement.setInt(9, persona.getLocalidad_id());
+			statement.setDate(10, persona.getCumple());
+			statement.setInt(11, persona.getTipo_contacto_id());
 			
 			if(statement.executeUpdate() > 0)
 				return true;
@@ -62,15 +65,16 @@ public class PersonaDAOSQL implements PersonaDAO {
 		try {
 			statement = conexion.getSQLConexion().prepareStatement(update);
 			statement.setString(1, persona.getNombre());
-			statement.setString(2, persona.getTelefono());
-			statement.setString(3, persona.getEmail());
-			statement.setString(4, persona.getCalle());
-			statement.setString(5, persona.getNumero());
-			statement.setString(6, persona.getPiso());
-			statement.setString(7, persona.getDepto());
-			statement.setInt(8, persona.getLocalidad_id());
-			statement.setInt(9, persona.getTipo_contacto_id());
-			statement.setInt(10, persona.getPersona_id());
+			statement.setString(2, persona.getApellido());
+			statement.setString(3, persona.getTelefono());
+			statement.setString(4, persona.getEmail());
+			statement.setString(5, persona.getCalle());
+			statement.setString(6, persona.getNumero());
+			statement.setString(7, persona.getPiso());
+			statement.setString(8, persona.getDepto());
+			statement.setInt(9, persona.getLocalidad_id());
+			statement.setInt(10, persona.getTipo_contacto_id());
+			statement.setInt(11, persona.getPersona_id());
 			
 			statement.executeUpdate();
 		} 
@@ -118,13 +122,14 @@ public class PersonaDAOSQL implements PersonaDAO {
 						resultSet.getInt("localidad_id"),
 						resultSet.getInt("tipo_contacto_id"),
 						resultSet.getString("nombre"),
+						resultSet.getString("apellido"),
 						resultSet.getString("telefono"),
 						resultSet.getString("email"),
 						resultSet.getString("calle"),
 						resultSet.getString("numero"),
 						resultSet.getString("piso"),
 						resultSet.getString("depto"),
-						resultSet.getDate("fecha_nacimiento")
+						resultSet.getDate("cumple")
 						));
 			
 		}
@@ -132,9 +137,7 @@ public class PersonaDAOSQL implements PersonaDAO {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println("Leyendo todas las personas");
-		System.out.println(personas);
+
 		return personas;
 	}
 	

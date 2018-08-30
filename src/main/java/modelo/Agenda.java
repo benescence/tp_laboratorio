@@ -1,14 +1,13 @@
 package modelo;
 
-import java.util.ArrayList;
 import java.util.List;
-import dto.LocalidadDTO;
-import dto.PersonaDTO;
-import dto.TipoContactoDTO;
 import persistencia.dao.interfaz.DAOAbstractFactory;
 import persistencia.dao.interfaz.LocalidadDAO;
 import persistencia.dao.interfaz.PersonaDAO;
 import persistencia.dao.interfaz.TipoContactoDAO;
+import persistencia.dto.LocalidadDTO;
+import persistencia.dto.PersonaDTO;
+import persistencia.dto.TipoContactoDTO;
 
 public class Agenda {
 	private PersonaDAO personaDAO;	
@@ -82,22 +81,5 @@ public class Agenda {
 	public List<TipoContactoDTO> obtenerTiposDeContacto() {
 		return tipoContactoDAO.readAll();		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

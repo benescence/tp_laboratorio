@@ -1,7 +1,8 @@
 package persistencia.dao.interfaz;
 
 import java.util.List;
-import dto.PersonaDTO;
+
+import persistencia.dto.PersonaDTO;
 
 public interface PersonaDAO {
 	

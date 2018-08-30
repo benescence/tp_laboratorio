@@ -5,9 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import persistencia.conexion.Conexion;
+
+import persistencia.Conexion;
 import persistencia.dao.interfaz.LocalidadDAO;
-import dto.LocalidadDTO;
+import persistencia.dto.LocalidadDTO;
 
 public class LocalidadDAOSQL implements LocalidadDAO {
 	private static final String insert = "INSERT INTO localidades(descripcion) VALUES(?)";
@@ -51,22 +52,7 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 	
 		return false;
 	}
-	/*PreparedStatement statement;
-	Conexion conexion = Conexion.getConexion();
-	try {
-		statement = conexion.getSQLConexion().prepareStatement(delete);
-		statement.setInt(1, localidad.getLocalidad_id());
-		
-		if(statement.executeUpdate() > 0)
-			return true;
-	} 
-	
-	catch (SQLException e) {
-		e.printStackTrace();
-	}
-	
-	return false;
-}*/
+
 	@Override
 	public boolean update(LocalidadDTO localidad) {
 		PreparedStatement statement;

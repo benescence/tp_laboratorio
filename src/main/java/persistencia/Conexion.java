@@ -1,4 +1,4 @@
-package persistencia.conexion;
+package persistencia;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +13,7 @@ public class Conexion {
 	private Conexion() {
 		try	{
 			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/agenda","root","pass");
+			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/agenda","root","root");
 			log.info("Conexión exitosa");
 		}
 		

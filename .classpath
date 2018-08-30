@@ -24,6 +24,5 @@
 	<classpathentry exported="true" kind="con" path="net.sf.jasperreports.JR_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="net.sf.jasperreports.JR_DEPENDENCIES_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="com.jaspersoft.server.JRS_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Usuario/Desktop/especificacion software/eclipse-jee-oxygen-3a-win32-x86_64/eclipse/configuration/org.eclipse.osgi/1168/0/.cp/lib/jasperreports-6.6.0.jar" rootpath="/" sourcepath="C:/Users/Usuario/Desktop/especificacion software/eclipse-jee-oxygen-3a-win32-x86_64/eclipse/configuration/org.eclipse.osgi/1168/0/.cp/lib/jasperreports-6.6.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

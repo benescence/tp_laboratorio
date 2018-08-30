@@ -2,19 +2,11 @@ package presentacion.reportes;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.log4j.Logger;
-
-import dto.PersonaDTO;
-import modelo.Agenda;
-import modelo.PersonaReporte;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -22,72 +14,45 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import persistencia.dto.PersonaDTO;
 
 public class ReporteAgenda {
 	private JasperReport reporte;
-	
+	private JasperViewer reporteViewer;	
 	private JasperPrint	reporteLleno;
 	private Logger log = Logger.getLogger(ReporteAgenda.class);
 
-	private JasperViewer reporteViewer;
-	
-	//Recibe la lista de personas para armar el reporte
-    public ReporteAgenda(List<PersonaDTO> personas) {
-    	//Hardcodeado
-    	
-    	
-    	Collections.sort(personas,new Comparator<PersonaDTO>() {
-    		
-    @Override
-    		public int compare(PersonaDTO p1, PersonaDTO p2) {
-    	  	
-    	return new Integer (p1.getCumple().compareTo(p2.getCumple()));
-    		}
-    		
-    	});
-	
-    	
-    	List<PersonaReporte> personasReporte =  new ArrayList<PersonaReporte>();
-    	
-    	personasReporte.addAll(personasServidor(personas)); 
-    System.out.println(personasReporte.toString() + "acaaaa");
-    	
-		Map<String, Object> parametersMap = new HashMap<String, Object>();
+	// Recibe una lista de personas DTO en cualquier estado
+	public ReporteAgenda(List<PersonaDTO> personasDTO) {
+
+		// La convierto en una lista de personas vo reporte
+		List<PersonaVOReporte> personas =  ReporteUtil.obtenerPersonasVOReporte(personasDTO);
+		
+		// Ordeno esta nueva lista por servidor de mail primero y luego por apellido y nombre
+		personas = ReporteUtil.ordenarPersonasVOReporte(personas);
+		
+		
+    	Map<String, Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));		
     	try	{
 			this.reporte = (JasperReport) JRLoader.loadObjectFromFile( "reportes" + File.separator + "porMes.jasper" );
 			this.reporteLleno = JasperFillManager.fillReport(this.reporte, parametersMap, 
-					new JRBeanCollectionDataSource(personasReporte));
+					new JRBeanCollectionDataSource(personas));
     		log.info("Se cargó correctamente el reporte");
 		}
     	
 		catch( JRException ex ) {
-			log.error("Ocurrió un error mientras se cargaba el archivo ReporteAgenda.Jasper", ex);
+			log.error("Ocurrió un error mientras se cargaba el archivo porMes.Jasper", ex);
 		}
     }       
     
     public void mostrar() {
-		this.reporteViewer = new JasperViewer(this.reporteLleno,false);
-		this.reporteViewer.setVisible(true);
-	}
-public  List <PersonaReporte> personasServidor(List<PersonaDTO> personasDTO){
-		
-		List <PersonaReporte> lista = new ArrayList<PersonaReporte>();
-		for (PersonaDTO personaDTO : personasDTO) {
-			lista.add(new PersonaReporte( 
-				personaDTO.getNombre(), 
-				personaDTO.getTelefono(),
-				personaDTO.getEmail(),
-				personaDTO.getEmail().substring(posicionServidor(personaDTO.getEmail())),
-				personaDTO.getCumple()));	
-				
-					
-		}  
-		System.out.println(lista.get(0).getServidorMail()+ "heloooooo");
-		return lista;
-		
+		reporteViewer = new JasperViewer(reporteLleno, false);
+		reporteViewer.setVisible(true);
 	}
 
+    /*
+    
 private static int posicionServidor(String string) {
 	
 	for (int i=0; i < string.length() ; i++) {
@@ -97,5 +62,5 @@ private static int posicionServidor(String string) {
 	}
 	return 0;
 }
-	
+*/	
 }

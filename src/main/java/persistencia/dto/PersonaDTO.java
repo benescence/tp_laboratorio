@@ -1,18 +1,20 @@
-package dto;
+package persistencia.dto;
 
 import java.sql.Date;
 
 public class PersonaDTO {
 	private Integer persona_id, localidad_id, tipo_contacto_id;
-	private String nombre, telefono, email, calle, numero, piso, depto;
+	private String nombre, apellido, telefono, email, calle, numero, piso, depto;
 	private Date cumple;
-	
-	public PersonaDTO(int persona_id, int localidad_id, int tipo_contacto_id, String nombre, String telefono,
-			String email, String calle, String numero, String piso, String depto, Date cumple) {
+
+	public PersonaDTO(Integer persona_id, Integer localidad_id, Integer tipo_contacto_id, String nombre,
+			String apellido, String telefono, String email, String calle, String numero, String piso, String depto,
+			Date cumple) {
 		this.persona_id = persona_id;
 		this.localidad_id = localidad_id;
 		this.tipo_contacto_id = tipo_contacto_id;
 		this.nombre = nombre;
+		this.apellido = apellido;
 		this.telefono = telefono;
 		this.email = email;
 		this.calle = calle;
@@ -54,6 +56,14 @@ public class PersonaDTO {
 		this.nombre = nombre;
 	}
 
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
 	public String getTelefono() {
 		return telefono;
 	}
@@ -62,7 +72,7 @@ public class PersonaDTO {
 		this.telefono = telefono;
 	}
 
-	public  String getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
@@ -109,5 +119,5 @@ public class PersonaDTO {
 	public void setCumple(Date cumple) {
 		this.cumple = cumple;
 	}
-
+	
 }

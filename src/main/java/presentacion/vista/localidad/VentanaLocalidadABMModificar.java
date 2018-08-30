@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dto.LocalidadDTO;
+import persistencia.dto.LocalidadDTO;
 import presentacion.controlador.ControladorLocalidadABM;
 import presentacion.vista.util.Validador;
 

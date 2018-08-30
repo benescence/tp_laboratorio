@@ -1,7 +1,8 @@
 package persistencia.dao.interfaz;
 
 import java.util.List;
-import dto.LocalidadDTO;
+
+import persistencia.dto.LocalidadDTO;
 
 public interface LocalidadDAO {
 	

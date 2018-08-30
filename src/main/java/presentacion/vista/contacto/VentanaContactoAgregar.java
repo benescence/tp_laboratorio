@@ -10,10 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JCalendar;
-import dto.LocalidadDTO;
-import dto.TipoContactoDTO;
+
 import modelo.Agenda;
 import persistencia.dao.mysql.DAOSQLFactory;
+import persistencia.dto.LocalidadDTO;
+import persistencia.dto.TipoContactoDTO;
 import presentacion.controlador.Controlador;
 import presentacion.vista.util.Validador;
 import javax.swing.JComboBox;
@@ -22,8 +23,8 @@ public class VentanaContactoAgregar extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private Controlador controlador;
 	private JPanel contenedor;
-	private JCalendar inFecha;
-	private JTextField inEmail, inCalle, inDepto, inNumero, inPiso, inTelefono, inNombre;
+	private JCalendar inCumple;
+	private JTextField inEmail, inCalle, inDepto, inNumero, inPiso, inTelefono, inNombre, inApellido;
 	private JButton btnAgregarContacto, btnLocalidadABM, btnTipoContactoABM;
 	private JComboBox<LocalidadDTO> inLocalidad;
 	private JComboBox <TipoContactoDTO> inTipoContacto;
@@ -33,27 +34,13 @@ public class VentanaContactoAgregar extends JFrame {
 		this.controlador = controlador;
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 520, 500);
+		setBounds(100, 100, 520, 600);
 		contenedor = new JPanel();
 		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contenedor);
 		contenedor.setLayout(null);
 
 		// Medidas de la ventana
-		int columna1 = 10;
-		int columna2 = 140;
-		int columna3 = 350;
-		
-		int fila1 = 10;
-		int fila2 = 40;
-		int fila3 = 70;
-		int fila4 = 100;
-		int fila5 = 130;
-		int fila6 = 160;
-		int fila7 = 190;
-		int fila8 = 220;
-		int fila9 = 430;
-		
 		int anchoLabelGrande = 120;
 		int anchoLabelChico = 50;
 		int anchoCajaGrande = 350;
@@ -61,7 +48,8 @@ public class VentanaContactoAgregar extends JFrame {
 		int alto = 20;
 
 		// Las etiquetas
-		JLabel lblNombre = new JLabel("Nombre y apellido");
+		JLabel lblNombre = new JLabel("Nombre");
+		JLabel lblApellido = new JLabel("Apellido");
 		JLabel lblTelefono = new JLabel("Teléfono");
 		JLabel lblMail = new JLabel("E- Mail");
 		JLabel lblFecha = new JLabel("Fecha de cumpleaños");
@@ -72,18 +60,20 @@ public class VentanaContactoAgregar extends JFrame {
 		JLabel lblDepto = new JLabel("Depto");
 		JLabel lblLocalidad = new JLabel("Localidad");
 		
-		lblNombre.setBounds(   columna1, fila1, anchoLabelGrande, alto);
-		lblTelefono.setBounds( columna1, fila2, anchoLabelGrande, alto);
-		lblMail.setBounds(     columna1, fila3, anchoLabelGrande, alto);
-		lblFecha.setBounds(    columna1, fila8, anchoLabelGrande, alto);
-		lblTipo.setBounds(     columna1, fila4, anchoLabelGrande, alto);
-		lblCalle.setBounds(    columna1, fila6, anchoLabelGrande, alto);
-		lblNumero.setBounds(   columna1, fila7, anchoLabelChico, alto);
-		lblPiso.setBounds(          180, fila7, anchoLabelChico, alto);
-		lblDepto.setBounds(         350, fila7, anchoLabelChico, alto);
-		lblLocalidad.setBounds(columna1, fila5, anchoLabelGrande, alto);
+		lblNombre.setBounds(   getColumnaX(1), getFilaY(1), anchoLabelGrande, alto);
+		lblApellido.setBounds( getColumnaX(1), getFilaY(2), anchoLabelGrande, alto);
+		lblTelefono.setBounds( getColumnaX(1), getFilaY(3), anchoLabelGrande, alto);
+		lblMail.setBounds(     getColumnaX(1), getFilaY(4), anchoLabelGrande, alto);
+		lblFecha.setBounds(    getColumnaX(1), getFilaY(9), anchoLabelGrande, alto);
+		lblTipo.setBounds(     getColumnaX(1), getFilaY(5), anchoLabelGrande, alto);
+		lblCalle.setBounds(    getColumnaX(1), getFilaY(7), anchoLabelGrande, alto);
+		lblNumero.setBounds(   getColumnaX(1), getFilaY(8), anchoLabelChico, alto);
+		lblPiso.setBounds(          180,       getFilaY(8), anchoLabelChico, alto);
+		lblDepto.setBounds(         350,       getFilaY(8), anchoLabelChico, alto);
+		lblLocalidad.setBounds(getColumnaX(1), getFilaY(6), anchoLabelGrande, alto);
 
 		contenedor.add(lblNombre);
+		contenedor.add(lblApellido);
 		contenedor.add(lblTelefono);
 		contenedor.add(lblMail);
 		contenedor.add(lblFecha);
@@ -97,14 +87,16 @@ public class VentanaContactoAgregar extends JFrame {
 		// Las cajas de texto
 		inEmail = new JTextField();
 		inTelefono = new JTextField();
-		inFecha = new JCalendar();
+		inCumple = new JCalendar();
 		inCalle = new JTextField();
 		inDepto = new JTextField();
 		inNumero = new JTextField();
 		inPiso = new JTextField();
 		inNombre = new JTextField();
+		inApellido = new JTextField();
 		
 		inNombre.setColumns(10);
+		inApellido.setColumns(10);
 		inEmail.setColumns(10);
 		inTelefono.setColumns(10);
 		inCalle.setColumns(10);
@@ -112,19 +104,21 @@ public class VentanaContactoAgregar extends JFrame {
 		inNumero.setColumns(10);
 		inPiso.setColumns(10);
 
-		inNombre.setBounds(  columna2, fila1, anchoCajaGrande, alto);
-		inTelefono.setBounds(columna2, fila2, anchoCajaGrande, alto);
-		inEmail.setBounds(   columna2, fila3, anchoCajaGrande, alto);
-		inFecha.setBounds(   columna2, fila8, 200, 200);
-		inCalle.setBounds(   columna2, fila6, anchoCajaGrande, alto);
-		inNumero.setBounds(  70, fila7, anchoCajaChico, alto);
-		inPiso.setBounds(    230, fila7, anchoCajaChico, alto);
-		inDepto.setBounds(   390, fila7, anchoCajaChico, alto);
+		inNombre.setBounds(  getColumnaX(2), getFilaY(1), anchoCajaGrande, alto);
+		inApellido.setBounds(getColumnaX(2), getFilaY(2), anchoCajaGrande, alto);
+		inTelefono.setBounds(getColumnaX(2), getFilaY(3), anchoCajaGrande, alto);
+		inEmail.setBounds(   getColumnaX(2), getFilaY(4), anchoCajaGrande, alto);
+		inCumple.setBounds(  getColumnaX(2), getFilaY(9), 200, 200);
+		inCalle.setBounds(   getColumnaX(2), getFilaY(7), anchoCajaGrande, alto);
+		inNumero.setBounds(  70,  getFilaY(8), anchoCajaChico, alto);
+		inPiso.setBounds(    230, getFilaY(8), anchoCajaChico, alto);
+		inDepto.setBounds(   390, getFilaY(8), anchoCajaChico, alto);
 
 		contenedor.add(inNombre);
+		contenedor.add(inApellido);
 		contenedor.add(inEmail);
 		contenedor.add(inTelefono);
-		contenedor.add(inFecha);
+		contenedor.add(inCumple);
 		contenedor.add(inCalle);
 		contenedor.add(inNumero );
 		contenedor.add(inDepto);
@@ -144,9 +138,9 @@ public class VentanaContactoAgregar extends JFrame {
 		btnLocalidadABM.addActionListener(this.controlador);
 		btnTipoContactoABM.addActionListener(this.controlador);
 		
-		btnAgregarContacto.setBounds(140, fila9, 200, 25);
-		btnLocalidadABM.setBounds(columna3, fila5, 140, alto);
-		btnTipoContactoABM.setBounds(columna3, fila4, 140, alto);
+		btnAgregarContacto.setBounds(140, getFilaY(10), 200, 25);
+		btnLocalidadABM.setBounds(getColumnaX(3), getFilaY(6), 140, alto);
+		btnTipoContactoABM.setBounds(getColumnaX(3), getFilaY(5), 140, alto);
 
 		contenedor.add(btnAgregarContacto);
 		contenedor.add(btnTipoContactoABM);
@@ -159,7 +153,7 @@ public class VentanaContactoAgregar extends JFrame {
 		Agenda agenda = new Agenda(new DAOSQLFactory());
 		List<LocalidadDTO> localidades = agenda.obtenerLocalidades();
 		JComboBox<LocalidadDTO> lista = new JComboBox<LocalidadDTO>();
-		lista.setBounds(140, 130, 200, 20);
+		lista.setBounds(getColumnaX(2), getFilaY(6), 200, 20);
 		for (LocalidadDTO localidad : localidades)
 			lista.addItem(localidad);
 		
@@ -173,7 +167,7 @@ public class VentanaContactoAgregar extends JFrame {
 		Agenda agenda = new Agenda(new DAOSQLFactory());
 		List<TipoContactoDTO> tipos = agenda.obtenerTiposDeContacto();
 		JComboBox<TipoContactoDTO> lista = new JComboBox<TipoContactoDTO>();
-		lista.setBounds(140, 100, 200, 20);
+		lista.setBounds(getColumnaX(2), getFilaY(5), 200, 20);
 
 		for (TipoContactoDTO tipo: tipos)
 			lista.addItem(tipo);
@@ -191,6 +185,11 @@ public class VentanaContactoAgregar extends JFrame {
 		if (!Validador.formatoLetraEspacio(inNombre.getText())) {
 			isOk = false;
 			mensaje += "    -El NOMBRE solo puede consistir de letras y espacios\n";
+		}
+
+		if (!Validador.formatoLetraEspacio(inApellido.getText())) {
+			isOk = false;
+			mensaje += "    -El APELLIDO solo puede consistir de letras y espacios\n";
 		}
 
 		if (!Validador.formatoNumeroLetraEspacio(inCalle.getText())) {
@@ -229,6 +228,20 @@ public class VentanaContactoAgregar extends JFrame {
 		return isOk;
 	}
 	
+	
+	// Getters para valores de posicion
+	private int getFilaY(int fila) {
+		int[] filas = {10, 40, 70, 100, 130, 160, 190, 220, 250, 460}; 
+		return filas[fila-1];
+	}
+
+	private int getColumnaX(int columna) {
+		int[] columnas = {10, 140, 350};
+		return columnas[columna-1];
+	}
+	
+	
+	
 	// GETTERS DE DATOS Y BOTONES
 	public LocalidadDTO getLocalidad() {
 		return (LocalidadDTO)inLocalidad.getSelectedItem();
@@ -240,6 +253,10 @@ public class VentanaContactoAgregar extends JFrame {
 	
 	public String getNombre() {
 		return inNombre.getText();
+	}
+
+	public String getApellido() {
+		return inApellido.getText();
 	}
 
 	public String getTelefono() {
@@ -267,7 +284,7 @@ public class VentanaContactoAgregar extends JFrame {
 	}
 	
 	public Date getFecha() {
-		java.util.Date utilDate = inFecha.getDate();
+		java.util.Date utilDate = inCumple.getDate();
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		return sqlDate;
 	}

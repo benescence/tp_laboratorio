@@ -4,12 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import modelo.Agenda;
+import persistencia.dto.TipoContactoDTO;
 import presentacion.vista.contacto.VentanaContactoAgregar;
 import presentacion.vista.contacto.VentanaContactoModificar;
 import presentacion.vista.tipocontacto.VentanaTipoContactoABM;
 import presentacion.vista.tipocontacto.VentanaTipoContactoABMAgregar;
 import presentacion.vista.tipocontacto.VentanaTipoContactoABMModificar;
-import dto.TipoContactoDTO;
 
 public class ControladorTipoContactoABM implements ActionListener {
 	private List<TipoContactoDTO> tipos_de_contacto_en_tabla;

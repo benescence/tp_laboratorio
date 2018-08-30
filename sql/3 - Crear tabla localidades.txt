@@ -1,11 +1,6 @@
-
+-- 3 Crear tabla de localidades
 CREATE TABLE localidades (
-
 	localidad_id int(5) AUTO_INCREMENT,
-
-	nombre varchar(50) NOT NULL,
-
+	descripcion varchar(50) NOT NULL,
 	PRIMARY KEY (localidad_id)
-
 );
-

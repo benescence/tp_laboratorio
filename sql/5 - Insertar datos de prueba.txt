@@ -1,0 +1,13 @@
+-- 5 Insertar datos de prueba
+insert into localidades(descripcion) values ("San Miguel");
+insert into localidades(descripcion) values ("Jose C. Paz");
+insert into localidades(descripcion) values ("Muñiz");
+insert into localidades(descripcion) values ("Moreno");
+insert into localidades(descripcion) values ("Polvorines");
+
+insert into tipo_contacto(descripcion) values ("Familia");
+insert into tipo_contacto(descripcion) values ("Amigos");
+insert into tipo_contacto(descripcion) values ("Trabajo");
+insert into tipo_contacto(descripcion) values ("Facultad");
+insert into tipo_contacto(descripcion) values ("Futbol");
+

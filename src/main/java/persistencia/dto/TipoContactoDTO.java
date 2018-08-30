@@ -1,4 +1,4 @@
-package dto;
+package persistencia.dto;
 
 public class TipoContactoDTO {
 	private Integer tipo_contacto_id;

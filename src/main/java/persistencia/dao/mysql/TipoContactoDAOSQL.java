@@ -5,9 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import persistencia.conexion.Conexion;
+
+import persistencia.Conexion;
 import persistencia.dao.interfaz.TipoContactoDAO;
-import dto.TipoContactoDTO;
+import persistencia.dto.TipoContactoDTO;
 
 public class TipoContactoDAOSQL implements TipoContactoDAO {
 	private static final String insert = "INSERT INTO tipo_contacto(descripcion) VALUES(?)";

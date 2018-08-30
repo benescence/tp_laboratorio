@@ -7,7 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import dto.TipoContactoDTO;
+
+import persistencia.dto.TipoContactoDTO;
 import presentacion.controlador.ControladorTipoContactoABM;
 import presentacion.vista.util.Validador;
 

@@ -3,18 +3,16 @@ package presentacion.controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import modelo.Agenda;
-import modelo.PersonaReporte;
+import persistencia.dto.PersonaDTO;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.Vista;
 import presentacion.vista.contacto.VentanaContactoAgregar;
 import presentacion.vista.contacto.VentanaContactoModificar;
 import presentacion.vista.localidad.VentanaLocalidadABM;
 import presentacion.vista.tipocontacto.VentanaTipoContactoABM;
-import dto.PersonaDTO;
 
 public class Controlador implements ActionListener {
 	private Vista vista;
@@ -50,6 +48,7 @@ public class Controlador implements ActionListener {
 		for (int i = 0; i < personas_en_tabla.size(); i ++) {
 			Object[] fila = {
 					personas_en_tabla.get(i).getNombre(),
+					personas_en_tabla.get(i).getApellido(),
 					personas_en_tabla.get(i).getTelefono(),
 					personas_en_tabla.get(i).getEmail(),
 					personas_en_tabla.get(i).getCalle(),
@@ -106,6 +105,7 @@ public class Controlador implements ActionListener {
 						ventanaContactoAgregar.getLocalidad().getLocalidad_id(),
 						ventanaContactoAgregar.getTipoContacto().getTipo_contacto_id(),
 						ventanaContactoAgregar.getNombre(),
+						ventanaContactoAgregar.getApellido(),
 						ventanaContactoAgregar.getTelefono(),
 						ventanaContactoAgregar.getMail(),
 						ventanaContactoAgregar.getCalle(),
@@ -141,13 +141,14 @@ public class Controlador implements ActionListener {
 						ventanaModificarContacto.getLocalidad().getLocalidad_id(),
 						ventanaModificarContacto.getTipoContacto().getTipo_contacto_id(),
 						ventanaModificarContacto.getNombre(),
+						ventanaModificarContacto.getApellido(),
 						ventanaModificarContacto.getTelefono(),
 						ventanaModificarContacto.getMail(),
 						ventanaModificarContacto.getCalle(),
 						ventanaModificarContacto.getNumero(),
 						ventanaModificarContacto.getPiso(),
 						ventanaModificarContacto.getDepto(),
-						ventanaModificarContacto.getFecha()
+						ventanaModificarContacto.getCumple()
 						);
 				agenda.modificarPersona(contacto);
 				llenarTabla();

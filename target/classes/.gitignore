@@ -1,4 +1,7 @@
-/presentacion/
-/META-INF/
-/modelo/
+/persistencia/
+/pojos/
 /dto/
+/modelo/
+/presentacion/
+/Main.class
+/main/

@@ -8,25 +8,27 @@ import javax.swing.JScrollPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import persistencia.Conexion;
+
 import javax.swing.JButton;
-import persistencia.conexion.Conexion;
 
 public class Vista {
 	private JFrame ventana;
 	private JTable tablaContactos;
 	private JButton btnAgregar, btnBorrar, btnModificar, btnReporte;
 	private DefaultTableModel modelContactos;
-	private String[] nombreColumnas = {"Nombre","Teléfono","E-mail","Calle","Número","Piso","Depto","Localidad","Cumpleaños", "Tipo de contacto"};
+	private String[] nombreColumnas = {"Nombre", "Apellido", "Teléfono","E-mail","Calle","Número","Piso","Depto","Localidad","Cumpleaños", "Tipo de contacto"};
 
 	public Vista() {
 		super();
 		ventana = new JFrame();
-		ventana.setBounds(100, 100, 1050, 350);
+		ventana.setBounds(100, 100, 1100, 400);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 1050, 350);
+		panel.setBounds(0, 0, 1100, 400);
 		ventana.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -34,7 +36,7 @@ public class Vista {
 		tablaContactos = new JTable(modelContactos);
 		
 		JScrollPane spPersonas = new JScrollPane();
-		spPersonas.setBounds(10, 10, 1010, 260);
+		spPersonas.setBounds(10, 10, 1050, 260);
 		spPersonas.setViewportView(tablaContactos);
 		panel.add(spPersonas);		
 

@@ -7,12 +7,12 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import modelo.Agenda;
+import persistencia.dto.LocalidadDTO;
 import presentacion.vista.contacto.VentanaContactoAgregar;
 import presentacion.vista.contacto.VentanaContactoModificar;
 import presentacion.vista.localidad.VentanaLocalidadABM;
 import presentacion.vista.localidad.VentanaLocalidadABMAgregar;
 import presentacion.vista.localidad.VentanaLocalidadABMModificar;
-import dto.LocalidadDTO;
 
 public class ControladorLocalidadABM implements ActionListener {
 	private List<LocalidadDTO> localidades_en_tabla;
@@ -115,32 +115,26 @@ public class ControladorLocalidadABM implements ActionListener {
 
 	private void borrarLocalidades() {
 		String mensaje= "Las siguientes Localidades no se pudieron borrar\n";
-		String isOk= "";
+		String isOk = "";
 		String nombreLocalidad = "";	
 		int[] filas_seleccionadas = ventanaLocalidadABM.getTablaLocalidades().getSelectedRows();
+		
 		for (int fila:filas_seleccionadas) {
 			try {
 				nombreLocalidad = localidades_en_tabla.get(fila).getDescripcion();
 				agenda.borrarLocalidad(localidades_en_tabla.get(fila));
 			} catch (Exception e1) {
-				if(isOk != "");
+				isOk = "ERROR";
 				mensaje += "    -"+ nombreLocalidad+ "\n";
-		
 			}
 		}
-		if (isOk.equals("")){
+		
+		if (!isOk.equals("")){
 			JOptionPane.showMessageDialog(null, mensaje);
-			System.out.println("llego");
 		}
 		
-	recargarTabla();System.out.println("recargar tabla" + mensaje);
-		
+		recargarTabla();
 	}
 	
 }
-
-
-
-
-
 
