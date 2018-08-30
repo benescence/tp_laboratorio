@@ -62,7 +62,7 @@ public class PersonaDTO {
 		this.telefono = telefono;
 	}
 
-	public String getEmail() {
+	public  String getEmail() {
 		return email;
 	}
 

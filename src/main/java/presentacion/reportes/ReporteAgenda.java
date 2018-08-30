@@ -49,7 +49,7 @@ public class ReporteAgenda {
     	
     	List<PersonaReporte> personasReporte =  new ArrayList<PersonaReporte>();
     	
-    	personasReporte.addAll(PersonaReporte.personasServidor(personas)); 
+    	personasReporte.addAll(personasServidor(personas)); 
     System.out.println(personasReporte.toString() + "acaaaa");
     	
 		Map<String, Object> parametersMap = new HashMap<String, Object>();
@@ -70,5 +70,32 @@ public class ReporteAgenda {
 		this.reporteViewer = new JasperViewer(this.reporteLleno,false);
 		this.reporteViewer.setVisible(true);
 	}
-   
+public  List <PersonaReporte> personasServidor(List<PersonaDTO> personasDTO){
+		
+		List <PersonaReporte> lista = new ArrayList<PersonaReporte>();
+		for (PersonaDTO personaDTO : personasDTO) {
+			lista.add(new PersonaReporte( 
+				personaDTO.getNombre(), 
+				personaDTO.getTelefono(),
+				personaDTO.getEmail(),
+				personaDTO.getEmail().substring(posicionServidor(personaDTO.getEmail())),
+				personaDTO.getCumple()));	
+				
+					
+		}  
+		System.out.println(lista.get(0).getServidorMail()+ "heloooooo");
+		return lista;
+		
+	}
+
+private static int posicionServidor(String string) {
+	
+	for (int i=0; i < string.length() ; i++) {
+		if ('@' == string.charAt(i));
+		
+		return i;
+	}
+	return 0;
+}
+	
 }

@@ -3,9 +3,11 @@ package presentacion.controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import modelo.Agenda;
+import modelo.PersonaReporte;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.Vista;
 import presentacion.vista.contacto.VentanaContactoAgregar;
@@ -36,6 +38,7 @@ public class Controlador implements ActionListener {
 		this.llenarTabla();
 		vista.show();
 	}
+
 	
 	private void llenarTabla() {
 		vista.getModelContactos().setRowCount(0);

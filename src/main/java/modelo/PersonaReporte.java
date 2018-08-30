@@ -8,15 +8,18 @@ import dto.PersonaDTO;
 
 public class PersonaReporte {
 
-	private String nombre, telefono, email,servidorMail,cumple;
+	private String nombre, telefono;
+	private String email;
+	private String servidorMail;
+	private Date cumple;
 
-	public PersonaReporte(String nombre, String telefono, String email, String servidorMail, String cumple) {
+	public PersonaReporte(String nombre, String telefono, String email, String servidorMail, Date date) {
 		super();
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.email = email;
 		this.servidorMail = servidorMail;
-		this.cumple = cumple;
+		this.cumple = date;
 	}
 
 	public String getNombre() {
@@ -35,7 +38,7 @@ public class PersonaReporte {
 		this.telefono = telefono;
 	}
 
-	public String getEmail() {
+	public  String getEmail() {
 		return email;
 	}
 
@@ -51,32 +54,15 @@ public class PersonaReporte {
 		this.servidorMail = servidorMail;
 	}
 
-	public String getCumple() {
+	public Date getCumple() {
 		return cumple;
 	}
 
-	public void setCumple(String cumple) {
+	public void setCumple(Date cumple) {
 		this.cumple = cumple;
 	}
-	
-public static List <PersonaReporte> personasServidor(List<PersonaDTO> personasDTO){
-		
-		List <PersonaReporte> lista = new ArrayList<PersonaReporte>();
-		for (PersonaDTO personaDTO : personasDTO) {
-			lista.add(new PersonaReporte( 
-				personaDTO.getNombre(), 
-				personaDTO.getTelefono(),
-				personaDTO.getEmail(),
-				null,
-				null));	
-				
-					
-		}  
-		
-		return lista;
-		
-	}
-	
+
+
 	
 	
 }
