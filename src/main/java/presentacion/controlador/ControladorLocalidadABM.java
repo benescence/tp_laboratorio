@@ -15,6 +15,7 @@ import presentacion.vista.localidad.VentanaLocalidadABMAgregar;
 import presentacion.vista.localidad.VentanaLocalidadABMModificar;
 
 public class ControladorLocalidadABM implements ActionListener {
+	private Controlador controladorPrincipal;
 	private List<LocalidadDTO> localidades_en_tabla;
 	private VentanaLocalidadABM ventanaLocalidadABM;
 	private VentanaLocalidadABMAgregar ventanaLocalidadABMAgregar;
@@ -23,14 +24,16 @@ public class ControladorLocalidadABM implements ActionListener {
 	private VentanaContactoModificar ventanaContactoModificar;
 	private Agenda agenda;
 	
-	public ControladorLocalidadABM(VentanaLocalidadABM ventanaLocalidadABM, VentanaContactoAgregar ventanaContactoAgregar, Agenda agenda) {
+	public ControladorLocalidadABM(Controlador controlador, VentanaLocalidadABM ventanaLocalidadABM, VentanaContactoAgregar ventanaContactoAgregar, Agenda agenda) {
+		this.controladorPrincipal = controlador;
 		this.ventanaLocalidadABM = ventanaLocalidadABM;
 		this.ventanaContactoAgregar = ventanaContactoAgregar;
 		this.agenda = agenda;
 		inicializar();
 	}
 	
-	public ControladorLocalidadABM(VentanaLocalidadABM ventanaLocalidadABM, VentanaContactoModificar ventanaContactoModificar, Agenda agenda) {
+	public ControladorLocalidadABM(Controlador controlador, VentanaLocalidadABM ventanaLocalidadABM, VentanaContactoModificar ventanaContactoModificar, Agenda agenda) {
+		this.controladorPrincipal = controlador;
 		this.ventanaLocalidadABM = ventanaLocalidadABM;
 		this.ventanaContactoModificar = ventanaContactoModificar;
 		this.agenda = agenda;
@@ -83,6 +86,7 @@ public class ControladorLocalidadABM implements ActionListener {
 				LocalidadDTO localidadDTO = localidades_en_tabla.get(filas_seleccionadas[0]);
 				ventanaLocalidadABMModificar = new VentanaLocalidadABMModificar(this, localidadDTO);
 			}
+			
 		}
 		
 		
@@ -109,7 +113,7 @@ public class ControladorLocalidadABM implements ActionListener {
 				recargarTabla();
 				ventanaLocalidadABMModificar.dispose();
 			}
-			
+			controladorPrincipal.recargarTabla();
 		}
 	}
 

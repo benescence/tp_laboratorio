@@ -12,6 +12,7 @@ import presentacion.vista.tipocontacto.VentanaTipoContactoABMAgregar;
 import presentacion.vista.tipocontacto.VentanaTipoContactoABMModificar;
 
 public class ControladorTipoContactoABM implements ActionListener {
+	private Controlador controlador;
 	private List<TipoContactoDTO> tipos_de_contacto_en_tabla;
 	private VentanaTipoContactoABM ventanaTipoContactoABM;
 	private VentanaTipoContactoABMAgregar ventanaTipoContactoABMAgregar;
@@ -20,14 +21,16 @@ public class ControladorTipoContactoABM implements ActionListener {
 	private VentanaContactoModificar ventanaContactoModificar;
 	private Agenda agenda;
 
-	public ControladorTipoContactoABM(VentanaTipoContactoABM ventanaTipoContactoABM, VentanaContactoAgregar ventanaContactoAgregar, Agenda agenda) {
+	public ControladorTipoContactoABM(Controlador controlador, VentanaTipoContactoABM ventanaTipoContactoABM, VentanaContactoAgregar ventanaContactoAgregar, Agenda agenda) {
+		this.controlador = controlador;
 		this.ventanaTipoContactoABM = ventanaTipoContactoABM;
 		this.ventanaContactoAgregar = ventanaContactoAgregar;
 		this.agenda = agenda;
 		inicializar();
 	}
 
-	public ControladorTipoContactoABM(VentanaTipoContactoABM ventanaTipoContactoABM, VentanaContactoModificar ventanaContactoModificar, Agenda agenda) {
+	public ControladorTipoContactoABM(Controlador controlador, VentanaTipoContactoABM ventanaTipoContactoABM, VentanaContactoModificar ventanaContactoModificar, Agenda agenda) {
+		this.controlador = controlador;
 		this.ventanaTipoContactoABM = ventanaTipoContactoABM;
 		this.ventanaContactoModificar = ventanaContactoModificar;
 		this.agenda = agenda;
@@ -109,6 +112,7 @@ public class ControladorTipoContactoABM implements ActionListener {
 				agenda.modificarTipoDeContacto(TipoContacto);
 				recargarTabla();
 				ventanaTipoContactoABMModificar.dispose();
+				controlador.recargarTabla();
 			}
 		}
 	}

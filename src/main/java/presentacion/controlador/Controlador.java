@@ -33,12 +33,12 @@ public class Controlador implements ActionListener {
 	}
 	
 	public void inicializar() {
-		this.llenarTabla();
+		this.recargarTabla();
 		vista.show();
 	}
 
 	
-	private void llenarTabla() {
+	public void recargarTabla() {
 		vista.getModelContactos().setRowCount(0);
 		vista.getModelContactos().setColumnCount(0);
 		vista.getModelContactos().setColumnIdentifiers(vista.getNombreColumnas());
@@ -77,7 +77,7 @@ public class Controlador implements ActionListener {
 			for (int fila:filas_seleccionadas)
 				agenda.borrarPersona(personas_en_tabla.get(fila));
 			
-			llenarTabla();
+			recargarTabla();
 		}
 
 		// MODIFICAR CONTACTO	
@@ -115,20 +115,20 @@ public class Controlador implements ActionListener {
 						ventanaContactoAgregar.getFecha()
 						);
 				agenda.agregarPersona(nuevaPersona);
-				llenarTabla();
+				recargarTabla();
 				ventanaContactoAgregar.dispose();
 			}
 			
 			// ADMINISTRAR LOCALIDAD
 			else if(e.getSource() == ventanaContactoAgregar.getBtnLocalidadABM()) {
 				ventanaLocalidadABM = new VentanaLocalidadABM();
-				new ControladorLocalidadABM(ventanaLocalidadABM, ventanaContactoAgregar, agenda);
+				new ControladorLocalidadABM(this, ventanaLocalidadABM, ventanaContactoAgregar, agenda);
 			}
 			
 			// ADMINISTRAR TIPO DE CONTACTO
 			else if(e.getSource() == ventanaContactoAgregar.getBtnTipoContactoABM()) {
 				ventanaTipoContactoABM = new VentanaTipoContactoABM();
-				new ControladorTipoContactoABM(ventanaTipoContactoABM, ventanaContactoAgregar, agenda);
+				new ControladorTipoContactoABM(this, ventanaTipoContactoABM, ventanaContactoAgregar, agenda);
 			}
 		}
 
@@ -151,20 +151,20 @@ public class Controlador implements ActionListener {
 						ventanaModificarContacto.getCumple()
 						);
 				agenda.modificarPersona(contacto);
-				llenarTabla();
+				recargarTabla();
 				ventanaModificarContacto.dispose();
 			}
 			
 			// ADMINISTRAR LOCALIDAD
 			else if(e.getSource() == ventanaModificarContacto.getBtnLocalidadABM()) {
 				ventanaLocalidadABM = new VentanaLocalidadABM();
-				new ControladorLocalidadABM(ventanaLocalidadABM, ventanaModificarContacto, agenda);
+				new ControladorLocalidadABM(this, ventanaLocalidadABM, ventanaModificarContacto, agenda);
 			}
 			
 			// ADMINISTRAR TIPO DE CONTACTO
 			else if(e.getSource() == ventanaModificarContacto.getBtnTipoContactoABM()) {
 				ventanaTipoContactoABM = new VentanaTipoContactoABM();
-				new ControladorTipoContactoABM(ventanaTipoContactoABM, ventanaModificarContacto, agenda);
+				new ControladorTipoContactoABM(this, ventanaTipoContactoABM, ventanaModificarContacto, agenda);
 			}
 		}
 
