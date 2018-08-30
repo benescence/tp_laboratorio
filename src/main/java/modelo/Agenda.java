@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 import dto.LocalidadDTO;
 import dto.PersonaDTO;
@@ -44,7 +45,7 @@ public class Agenda {
 		localidadDAO.insert(localidad);
 	}
 	
-	public void borrarLocalidad(LocalidadDTO localidad) {
+	public void borrarLocalidad(LocalidadDTO localidad) throws Exception{
 		localidadDAO.delete(localidad);
 	}
 
@@ -81,5 +82,22 @@ public class Agenda {
 	public List<TipoContactoDTO> obtenerTiposDeContacto() {
 		return tipoContactoDAO.readAll();		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

@@ -2,6 +2,7 @@ package presentacion.reportes;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -12,6 +13,8 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import dto.PersonaDTO;
+import modelo.Agenda;
+import modelo.PersonaReporte;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -43,12 +46,18 @@ public class ReporteAgenda {
     		
     	});
 	
+    	
+    	List<PersonaReporte> personasReporte =  new ArrayList<PersonaReporte>();
+    	
+    	personasReporte.addAll(PersonaReporte.personasServidor(personas)); 
+    System.out.println(personasReporte.toString() + "acaaaa");
+    	
 		Map<String, Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));		
     	try	{
 			this.reporte = (JasperReport) JRLoader.loadObjectFromFile( "reportes" + File.separator + "porMes.jasper" );
 			this.reporteLleno = JasperFillManager.fillReport(this.reporte, parametersMap, 
-					new JRBeanCollectionDataSource(personas));
+					new JRBeanCollectionDataSource(personasReporte));
     		log.info("Se cargó correctamente el reporte");
 		}
     	

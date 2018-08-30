@@ -37,24 +37,36 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 	}
 	
 	@Override
-	public boolean delete(LocalidadDTO localidad) {
+	public boolean delete(LocalidadDTO localidad) throws Exception { 
 		PreparedStatement statement;
 		Conexion conexion = Conexion.getConexion();
-		try {
+		
 			statement = conexion.getSQLConexion().prepareStatement(delete);
 			statement.setInt(1, localidad.getLocalidad_id());
 			
 			if(statement.executeUpdate() > 0)
 				return true;
-		} 
 		
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
 		
+	
 		return false;
 	}
-
+	/*PreparedStatement statement;
+	Conexion conexion = Conexion.getConexion();
+	try {
+		statement = conexion.getSQLConexion().prepareStatement(delete);
+		statement.setInt(1, localidad.getLocalidad_id());
+		
+		if(statement.executeUpdate() > 0)
+			return true;
+	} 
+	
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+	
+	return false;
+}*/
 	@Override
 	public boolean update(LocalidadDTO localidad) {
 		PreparedStatement statement;

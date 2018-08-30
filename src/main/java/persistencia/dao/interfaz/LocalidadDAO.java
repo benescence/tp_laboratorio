@@ -7,7 +7,7 @@ public interface LocalidadDAO {
 	
 	public boolean insert(LocalidadDTO localidad);
 	
-	public boolean delete(LocalidadDTO localidad);
+	public boolean delete(LocalidadDTO localidad) throws Exception;
 	
 	public boolean update(LocalidadDTO localidad);
 	

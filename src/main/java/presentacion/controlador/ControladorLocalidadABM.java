@@ -3,6 +3,9 @@ package presentacion.controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import modelo.Agenda;
 import presentacion.vista.contacto.VentanaContactoAgregar;
 import presentacion.vista.contacto.VentanaContactoModificar;
@@ -69,11 +72,8 @@ public class ControladorLocalidadABM implements ActionListener {
 		
 		// BORRAR LOCALIDAD	
 		else if(e.getSource() == ventanaLocalidadABM.getBtnBorrar()) {
-			int[] filas_seleccionadas = ventanaLocalidadABM.getTablaLocalidades().getSelectedRows();
-			for (int fila:filas_seleccionadas)
-				agenda.borrarLocalidad(localidades_en_tabla.get(fila));
+            borrarLocalidades();
 			
-			recargarTabla();
 		}
 
 		// MODIFICAR LOCALIDAD	
@@ -112,5 +112,35 @@ public class ControladorLocalidadABM implements ActionListener {
 			
 		}
 	}
+
+	private void borrarLocalidades() {
+		String mensaje= "Las siguientes Localidades no se pudieron borrar\n";
+		String isOk= "";
+		String nombreLocalidad = "";	
+		int[] filas_seleccionadas = ventanaLocalidadABM.getTablaLocalidades().getSelectedRows();
+		for (int fila:filas_seleccionadas) {
+			try {
+				nombreLocalidad = localidades_en_tabla.get(fila).getDescripcion();
+				agenda.borrarLocalidad(localidades_en_tabla.get(fila));
+			} catch (Exception e1) {
+				if(isOk != "");
+				mensaje += "    -"+ nombreLocalidad+ "\n";
+		
+			}
+		}
+		if (isOk.equals("")){
+			JOptionPane.showMessageDialog(null, mensaje);
+			System.out.println("llego");
+		}
+		
+	recargarTabla();System.out.println("recargar tabla" + mensaje);
+		
+	}
 	
 }
+
+
+
+
+
+

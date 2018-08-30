@@ -191,14 +191,22 @@ public class VentanaContactoModificar extends JFrame {
 		Agenda agenda = new Agenda(new DAOSQLFactory());
 		List<TipoContactoDTO> tipos = agenda.obtenerTiposDeContacto();
 		JComboBox<TipoContactoDTO> lista = new JComboBox<TipoContactoDTO>();
+		TipoContactoDTO tipoActual = tipos.get(0);
+		
 		lista.setBounds(140, 100, 200, 20);
 
-		for (TipoContactoDTO tipo: tipos)
+		for (TipoContactoDTO tipo: tipos) {
 			lista.addItem(tipo);
+			if(tipo.getTipo_contacto_id()== persona.getTipo_contacto_id())
+				tipoActual = tipo;
+		}
+			
 		
 		if (inTipoContacto != null)
 			contenedor.remove(inTipoContacto);
 		inTipoContacto = lista;
+		
+		inTipoContacto.setSelectedItem(tipoActual);
 		contenedor.add(inTipoContacto);
 	}
 
