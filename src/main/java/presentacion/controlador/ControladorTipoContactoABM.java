@@ -3,7 +3,9 @@ package presentacion.controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.JOptionPane;
 import modelo.Agenda;
+import persistencia.dto.PersonaDTO;
 import persistencia.dto.TipoContactoDTO;
 import presentacion.vista.contacto.VentanaContactoAgregar;
 import presentacion.vista.contacto.VentanaContactoModificar;
@@ -73,11 +75,7 @@ public class ControladorTipoContactoABM implements ActionListener {
 		
 		// BORRAR TIPO DE CONTACTO	
 		else if(e.getSource() == ventanaTipoContactoABM.getBtnBorrar()) {
-			int[] filas_seleccionadas = ventanaTipoContactoABM.getTablaTiposDeContacto().getSelectedRows();
-			for (int fila:filas_seleccionadas)
-				agenda.borrarTipoDeContacto(tipos_de_contacto_en_tabla.get(fila));
-			
-			recargarTabla();
+			borrarTipoContacto();
 		}
 
 		// MODIFICAR TIPO DE CONTACTO	
@@ -115,6 +113,40 @@ public class ControladorTipoContactoABM implements ActionListener {
 				controlador.recargarTabla();
 			}
 		}
+	}
+	
+	private void borrarTipoContacto() {
+		String mensaje= "Los siguientes TIPOS DE CONTACTO no se pueden borrar porque estan en uso\n";
+		boolean isOk = true;
+		int[] filas_seleccionadas = ventanaTipoContactoABM.getTablaTiposDeContacto().getSelectedRows();
+		
+		try {
+			for (int fila: filas_seleccionadas) {
+				TipoContactoDTO tipoContactoDTO = tipos_de_contacto_en_tabla.get(fila);
+				
+				if (!tipoContactoEnUso(tipoContactoDTO))
+					agenda.borrarTipoDeContacto(tipoContactoDTO);			
+				else {
+					isOk = false;
+					mensaje += "    -"+ tipoContactoDTO.getDescripcion()+ "\n";
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (!isOk)
+			JOptionPane.showMessageDialog(null, mensaje);
+		
+		recargarTabla();
+	}
+	
+	private boolean tipoContactoEnUso(TipoContactoDTO pTipoContactoDTO) {
+		boolean enUso = false;
+		for (PersonaDTO persona: agenda.obtenerPersonas())
+			enUso = enUso || persona.getTipo_contacto_id() == pTipoContactoDTO.getTipo_contacto_id();
+		
+		return enUso;		
 	}
 	
 }
