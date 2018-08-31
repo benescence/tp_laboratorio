@@ -31,16 +31,14 @@ public class ReporteAgenda {
 		// Ordeno esta nueva lista por servidor de mail primero y luego por apellido y nombre
 		personas = ReporteUtil.ordenarPersonasVOReporte(personas);
 		
-		
-    	Map<String, Object> parametersMap = new HashMap<String, Object>();
-		parametersMap.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));		
-    	try	{
-			this.reporte = (JasperReport) JRLoader.loadObjectFromFile( "reportes" + File.separator + "porMes.jasper" );
-			this.reporteLleno = JasperFillManager.fillReport(this.reporte, parametersMap, 
-					new JRBeanCollectionDataSource(personas));
+    	Map<String, Object> parametros = new HashMap<String, Object>();
+		parametros.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));		
+    	
+		try	{
+			reporte = (JasperReport) JRLoader.loadObjectFromFile( "reportes" + File.separator + "porMes.jasper" );
+			reporteLleno = JasperFillManager.fillReport(reporte, parametros, new JRBeanCollectionDataSource(personas));
     		log.info("Se cargó correctamente el reporte");
 		}
-    	
 		catch( JRException ex ) {
 			log.error("Ocurrió un error mientras se cargaba el archivo porMes.Jasper", ex);
 		}
@@ -51,16 +49,4 @@ public class ReporteAgenda {
 		reporteViewer.setVisible(true);
 	}
 
-    /*
-    
-private static int posicionServidor(String string) {
-	
-	for (int i=0; i < string.length() ; i++) {
-		if ('@' == string.charAt(i));
-		
-		return i;
-	}
-	return 0;
-}
-*/	
 }

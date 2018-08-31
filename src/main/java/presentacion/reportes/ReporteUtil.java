@@ -9,30 +9,19 @@ import persistencia.dto.PersonaDTO;
 public class ReporteUtil {
 	
 	public static List<PersonaVOReporte> obtenerPersonasVOReporte(List<PersonaDTO> personasDTO) {
-
 		List<PersonaVOReporte> lista = new ArrayList<PersonaVOReporte>();
+		
 		for (PersonaDTO personaDTO : personasDTO) {
 			lista.add(new PersonaVOReporte( 
-				personaDTO.getPersona_id(),
-				personaDTO.getLocalidad_id(),
-				personaDTO.getTipo_contacto_id(),
 				personaDTO.getNombre(),
 				personaDTO.getApellido(),
 				personaDTO.getTelefono(),
 				personaDTO.getEmail(),
-				null,
-				null,
-				null,
-				personaDTO.getCalle(),
-				personaDTO.getNumero(),
-				personaDTO.getPiso(),
-				personaDTO.getDepto(),
-				null
+				extraerServidorDeMail(personaDTO)
 				));
-					
 		}  
 		
-		return null;		
+		return lista;		
 	}
 
 	public static List<PersonaVOReporte> ordenarPersonasVOReporte(List<PersonaVOReporte> personas){
@@ -40,13 +29,42 @@ public class ReporteUtil {
     		
     		@Override
     		public int compare(PersonaVOReporte p1, PersonaVOReporte p2) {
-    			return new Integer (p1.getCumple().compareTo(p2.getCumple()));
+    			
+    			 // Ordeno por servidor de email
+    			int ret = p1.getServidorMail().compareTo(p2.getServidorMail());
+    			
+    			// Si son iguales ordeno por apellido
+    			if (ret == 0)
+    				ret = p1.getApellido().compareTo(p2.getApellido());
+    			
+    			// Si son iguales ordeno por nombre
+    			if (ret == 0)
+    				ret = p1.getNombre().compareTo(p2.getNombre());
+    			
+    			return ret;
     		}
     		
     	});
-	
 		
-		return null;
+		return personas;
 	}
 
+	private static String extraerServidorDeMail(PersonaDTO personaDTO) {
+		String email = personaDTO.getEmail();
+		String servidor = "";
+		boolean esArroba = false;
+		boolean esPunto = false;
+		
+		for (int i=0; i<email.length(); i++) {
+			char caracter = email.charAt(i);
+			esArroba = esArroba || (caracter == '@');
+			esPunto = esPunto || (caracter == '.');
+			
+			if (esArroba && !esPunto)
+				servidor += caracter;
+		}
+		
+		return servidor;
+	}
+	
 }

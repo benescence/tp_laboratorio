@@ -1,11 +1,9 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=c95dd6fe85c346617c2221d36f23c7ed87f263e9
 eclipse.preferences.version=1
-<<<<<<< HEAD
-encoding//reportes/Blank_A4.jrxml=UTF-8
 encoding//reportes/ReporteAgenda.jrxml=UTF-8
-encoding//reportes/prueba1.jrxml=UTF-8
-=======
 encoding//reportes/porMes.jrxml=UTF-8
->>>>>>> c95dd6fe85c346617c2221d36f23c7ed87f263e9
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/test/java=UTF-8
