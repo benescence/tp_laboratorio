@@ -13,7 +13,7 @@ public class Conexion {
 	private Conexion() {
 		try	{
 			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/agenda","root","root");
+			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/agenda","root","pass");
 			log.info("Conexión exitosa");
 		}
 		
