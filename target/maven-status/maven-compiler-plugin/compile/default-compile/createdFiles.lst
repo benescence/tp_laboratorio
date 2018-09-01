@@ -6,6 +6,7 @@ persistencia\Conexion.class
 presentacion\controlador\ControladorTipoContactoABM.class
 persistencia\dto\LocalidadDTO.class
 presentacion\reportes\ReporteAgenda.class
+Propiedades.class
 persistencia\dto\PersonaDTO.class
 presentacion\vista\Vista$1.class
 presentacion\vista\tipocontacto\VentanaTipoContactoABMAgregar.class
@@ -30,3 +31,4 @@ persistencia\dao\mysql\LocalidadDAOSQL.class
 persistencia\dao\interfaz\DAOAbstractFactory.class
 persistencia\dao\mysql\DAOSQLFactory.class
 persistencia\dao\mysql\TipoContactoDAOSQL.class
+persistencia\Propiedades.class
