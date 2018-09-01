@@ -12,6 +12,9 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="total_contactos" class="java.lang.Integer" evaluationTime="Late">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select
 	"1" as telefono,
@@ -39,7 +42,11 @@ from personas]]>
 	<field name="email" class="java.lang.String">
 		<fieldDescription><![CDATA[email]]></fieldDescription>
 	</field>
-	<group name="Mes">
+	<variable name="v_prueba" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="Servidor">
 		<groupExpression><![CDATA[$F{servidorMail}]]></groupExpression>
 		<groupHeader>
 			<band height="30">
@@ -47,11 +54,11 @@ from personas]]>
 					<reportElement x="0" y="0" width="780" height="30" backcolor="#6CBAD9" uuid="dc4687d0-67d3-4790-8672-b7050715d7f7"/>
 				</rectangle>
 				<textField>
-					<reportElement mode="Transparent" x="50" y="0" width="400" height="25" backcolor="#186FC7" uuid="1980000d-0fa7-4122-9aef-4574160905e7"/>
-					<textElement>
+					<reportElement mode="Transparent" x="330" y="0" width="400" height="25" backcolor="#186FC7" uuid="1980000d-0fa7-4122-9aef-4574160905e7"/>
+					<textElement textAlignment="Right">
 						<font fontName="Calibri" size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{servidorMail}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Servidor de E-Mail "+$F{servidorMail}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -61,11 +68,11 @@ from personas]]>
 					<reportElement mode="Opaque" x="0" y="0" width="780" height="30" backcolor="#3CCF7B" uuid="0bb929c9-895b-45c5-9c3b-da61b639e961"/>
 				</rectangle>
 				<textField>
-					<reportElement x="580" y="0" width="200" height="25" uuid="10ffd9b0-848a-4446-8495-39abe3fa5e9e"/>
-					<textElement>
+					<reportElement x="330" y="0" width="400" height="25" uuid="10ffd9b0-848a-4446-8495-39abe3fa5e9e"/>
+					<textElement textAlignment="Right">
 						<font fontName="Calibri" size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{COLUMN_NUMBER}+" contactos"]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{Servidor_COUNT} +" contactos"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -179,17 +186,17 @@ from personas]]>
 	<summary>
 		<band height="410" splitType="Stretch">
 			<pieChart>
-				<chart evaluationTime="Report">
-					<reportElement x="180" y="60" width="400" height="350" uuid="5fb9a058-1263-4b55-b683-1413f59705b9"/>
+				<chart evaluationTime="Report" renderType="image" theme="default">
+					<reportElement x="180" y="60" width="400" height="350" printWhenGroupChanges="Servidor" uuid="c87a94cd-503b-4e08-940b-f9e86b2b0b51"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<pieDataset maxCount="12" minPercentage="1.0">
-					<dataset incrementType="Column"/>
+					<dataset incrementType="Group" incrementGroup="Servidor"/>
 					<keyExpression><![CDATA[$F{servidorMail}]]></keyExpression>
-					<valueExpression><![CDATA[1]]></valueExpression>
-					<labelExpression><![CDATA[$F{servidorMail}]]></labelExpression>
+					<valueExpression><![CDATA[$V{Servidor_COUNT}]]></valueExpression>
+					<labelExpression><![CDATA["%"+($V{Servidor_COUNT} * 100)/$P{total_contactos}]]></labelExpression>
 				</pieDataset>
 				<piePlot>
 					<plot/>

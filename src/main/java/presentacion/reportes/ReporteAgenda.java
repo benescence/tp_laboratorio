@@ -32,7 +32,8 @@ public class ReporteAgenda {
 		personas = ReporteUtil.ordenarPersonasVOReporte(personas);
 		
     	Map<String, Object> parametros = new HashMap<String, Object>();
-		parametros.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));		
+		parametros.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));	
+		parametros.put("total_contactos", personas.size());
     	
 		try	{
 			reporte = (JasperReport) JRLoader.loadObjectFromFile( "reportes" + File.separator + "porMes.jasper" );
