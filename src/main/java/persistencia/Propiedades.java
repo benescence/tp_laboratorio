@@ -41,7 +41,7 @@ public class Propiedades {
 	public static String recuperar(String clave) {	
 		Properties propiedades = new Properties();
 		InputStream entrada = null;
-		String ret = "";
+		String ret = null;
 		
 		try {	
 			entrada = new FileInputStream(direccion);
