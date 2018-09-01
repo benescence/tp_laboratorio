@@ -94,15 +94,6 @@ public class VentanaContactoAgregar extends JFrame {
 		inPiso = new JTextField();
 		inNombre = new JTextField();
 		inApellido = new JTextField();
-		
-		inNombre.setColumns(10);
-		inApellido.setColumns(10);
-		inEmail.setColumns(10);
-		inTelefono.setColumns(10);
-		inCalle.setColumns(10);
-		inDepto.setColumns(10);
-		inNumero.setColumns(10);
-		inPiso.setColumns(10);
 
 		inNombre.setBounds(  getColumnaX(2), getFilaY(1), anchoCajaGrande, alto);
 		inApellido.setBounds(getColumnaX(2), getFilaY(2), anchoCajaGrande, alto);
@@ -114,6 +105,15 @@ public class VentanaContactoAgregar extends JFrame {
 		inPiso.setBounds(    230, getFilaY(8), anchoCajaChico, alto);
 		inDepto.setBounds(   390, getFilaY(8), anchoCajaChico, alto);
 
+		// valores por defecto
+		inApellido.setText("-");
+		inTelefono.setText("-");
+		inEmail.setText("-");
+		inCalle.setText("-");
+		inNumero.setText("-");
+		inPiso.setText("-");				
+		inDepto.setText("-");
+		
 		contenedor.add(inNombre);
 		contenedor.add(inApellido);
 		contenedor.add(inEmail);
@@ -187,17 +187,17 @@ public class VentanaContactoAgregar extends JFrame {
 			mensaje += "    -El NOMBRE solo puede consistir de letras y espacios\n";
 		}
 
-		if (!Validador.formatoLetraEspacio(inApellido.getText())) {
+		if (!Validador.formatoApellido(inApellido.getText())) {
 			isOk = false;
 			mensaje += "    -El APELLIDO solo puede consistir de letras y espacios\n";
 		}
 
-		if (!Validador.formatoNumeroLetraEspacio(inCalle.getText())) {
+		if (!Validador.formatoCalle(inCalle.getText())) {
 			isOk = false;
 			mensaje += "    -La CALLE solo puede consistir de letras, numeros y espacios\n";
 		}
 
-		if (!Validador.formatoNumero(inTelefono.getText())) {
+		if (!Validador.formatoTelefono(inTelefono.getText())) {
 			isOk = false;
 			mensaje += "    -El TELEFONO solo puede consistir de numeros\n";
 		}
@@ -207,12 +207,12 @@ public class VentanaContactoAgregar extends JFrame {
 			mensaje += "    -El NUMERO solo puede consistir de numeros\n";
 		}
 		
-		if (!Validador.formatoNumero(inPiso.getText())) {
+		if (!Validador.formatoPiso(inPiso.getText())) {
 			isOk = false;
 			mensaje += "    -El PISO solo puede consistir de numeros\n";
 		}
 
-		if (!Validador.formatoNumeroLetraEspacio(inDepto.getText())) {
+		if (!Validador.formatoDepartamento(inDepto.getText())) {
 			isOk = false;
 			mensaje += "    -El DEPTO solo puede consistir de letras, numeros y espacios\n";
 		}

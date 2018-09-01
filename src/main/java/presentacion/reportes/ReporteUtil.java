@@ -51,7 +51,10 @@ public class ReporteUtil {
 
 	private static String extraerServidorDeMail(PersonaDTO personaDTO) {
 		String email = personaDTO.getEmail();
-		String servidor = "";
+		if (email.equals("-"))
+			return "Sin servidor";
+		
+		String servidor = "";		
 		boolean esArroba = false;
 		boolean esPunto = false;
 		

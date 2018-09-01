@@ -81,7 +81,7 @@ from personas]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="80" splitType="Stretch">
+		<band height="81" splitType="Stretch">
 			<staticText>
 				<reportElement x="50" y="0" width="300" height="25" forecolor="#0730FA" uuid="5067cd7c-555f-423c-937a-ce681d5bff83"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
@@ -91,7 +91,7 @@ from personas]]>
 			</staticText>
 			<image hAlign="Center">
 				<reportElement x="630" y="0" width="150" height="70" uuid="e34c9fd5-d316-42c3-9553-7e887dd40e02"/>
-				<imageExpression><![CDATA["tp_laboratorio-master/src/main/resources/LogoNuevoUNGS.png"]]></imageExpression>
+				<imageExpression><![CDATA["src/main/resources/LogoNuevoUNGS.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement mode="Transparent" x="50" y="30" width="300" height="25" forecolor="#5035E8" uuid="96630f52-8958-4322-8177-2fca8177c4af"/>

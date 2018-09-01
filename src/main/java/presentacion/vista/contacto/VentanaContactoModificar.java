@@ -223,17 +223,17 @@ public class VentanaContactoModificar extends JFrame {
 			mensaje += "    -La CALLE solo puede consistir de letras, numeros y espacios\n";
 		}
 
-		if (!Validador.formatoNumero(inTelefono.getText())) {
+		if (!Validador.formatoNumerico(inTelefono.getText())) {
 			isOk = false;
 			mensaje += "    -El TELEFONO solo puede consistir de numeros\n";
 		}
 		
-		if (!Validador.formatoNumero(inNumero.getText())) {
+		if (!Validador.formatoNumerico(inNumero.getText())) {
 			isOk = false;
 			mensaje += "    -El NUMERO solo puede consistir de numeros\n";
 		}
 		
-		if (!Validador.formatoNumero(inPiso.getText())) {
+		if (!Validador.formatoNumerico(inPiso.getText())) {
 			isOk = false;
 			mensaje += "    -El PISO solo puede consistir de numeros\n";
 		}
