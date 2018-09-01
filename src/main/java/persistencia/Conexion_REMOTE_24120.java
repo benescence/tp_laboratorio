@@ -18,11 +18,7 @@ public class Conexion {
 			String password = Propiedades.recuperar("password");
 			
 			Class.forName("com.mysql.jdbc.Driver");
-<<<<<<< HEAD
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/agenda","root","pass");
-=======
 			this.connection = DriverManager.getConnection("jdbc:mysql://"+IP+":"+puerto+"/agenda", usuario, password);
->>>>>>> 6a89ffb17b044d9af4885d6fbe7c9285392439b3
 			log.info("Conexión exitosa");
 		}
 		
