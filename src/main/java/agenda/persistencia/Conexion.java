@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.apache.log4j.Logger;
-
 import agenda.util.Propiedades;
 
 public class Conexion {
@@ -51,5 +50,21 @@ public class Conexion {
 		
 		instancia = null;
 	}
+
+	public static boolean probarConexion(String usuario, String password, String IP, String puerto) {
+		boolean exito = false;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			DriverManager.getConnection("jdbc:mysql://"+IP+":"+puerto+"/agenda", usuario, password);
+			exito = true;
+		} catch (Exception e) {
+			System.out.println("Los datos de entrada para la conexion fallaron");
+		}
+		
+		return exito;
+	}
+
+
 
 }

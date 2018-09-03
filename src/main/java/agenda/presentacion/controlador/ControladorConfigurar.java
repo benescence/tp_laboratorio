@@ -2,11 +2,11 @@ package agenda.presentacion.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import agenda.negocios.Agenda;
+import agenda.persistencia.Conexion;
 import agenda.persistencia.mysql.DAOSQLFactory;
 import agenda.presentacion.vista.Vista;
 import agenda.presentacion.vista.configurar.VentanaConfigurar;
@@ -29,7 +29,7 @@ public class ControladorConfigurar implements ActionListener {
 			String IP = ventana.getIP();
 			String puerto = ventana.getPuerto();
 			
-			if (!probarConexion(usuario, password, IP, puerto)) {
+			if (!Conexion.probarConexion(usuario, password, IP, puerto)) {
 				JOptionPane.showMessageDialog(null, "La conexion ha fallado.\nPor favor revise los datos de conexion.");
 				return;
 			}
@@ -52,24 +52,10 @@ public class ControladorConfigurar implements ActionListener {
 		
 		// PROBAR CONEXION
 		else if(e.getSource() == ventana.getBtnProbarconexion()) {
-			if (probarConexion(ventana.getUsuario(), ventana.getPassword(), ventana.getIP(), ventana.getPuerto()))
+			if (Conexion.probarConexion(ventana.getUsuario(), ventana.getPassword(), ventana.getIP(), ventana.getPuerto()))
 				JOptionPane.showMessageDialog(null, "La conexion ha sido exitosa");
 			else
 				JOptionPane.showMessageDialog(null, "La conexion ha fallado");
 		}
-	}
-	
-	private boolean probarConexion(String usuario, String password, String IP, String puerto) {
-		boolean exito = false;
-		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			DriverManager.getConnection("jdbc:mysql://"+IP+":"+puerto+"/agenda", usuario, password);
-			exito = true;
-		} catch (Exception e) {
-			System.out.println("Los datos de entrada para la conexion fallaron");
-		}
-		
-		return exito;
 	}
 }

@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import agenda.util.Propiedades;
+
 public class VentanaConfigurar extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contenedor;
@@ -55,11 +57,11 @@ public class VentanaConfigurar extends JFrame {
 		inIP.setBounds(      getColumnaX(2), getFilaY(3), anchoCaja, alto);
 		inPuerto.setBounds(  getColumnaX(2), getFilaY(4), anchoCaja, alto);
 
-		// VALORES POR DEFECTO
-		inIP.setText("localhost");
-		inPuerto.setText("3306");
-		inUsuario.setText("root");
-		inPassword.setText("root");
+		inIP.setText(Propiedades.recuperar("IP"));
+		inPuerto.setText(Propiedades.recuperar("puerto"));
+		inUsuario.setText(Propiedades.recuperar("usuario"));
+		inPassword.setText(Propiedades.recuperar("password"));
+		
 		
 		contenedor.add(inIP);
 		contenedor.add(inPuerto);
