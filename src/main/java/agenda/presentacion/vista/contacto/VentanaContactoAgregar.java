@@ -16,7 +16,7 @@ import agenda.persistencia.mysql.DAOSQLFactory;
 import agenda.persistencia.pojos.LocalidadDTO;
 import agenda.persistencia.pojos.TipoContactoDTO;
 import agenda.presentacion.controlador.Controlador;
-import agenda.presentacion.vista.util.Validador;
+import agenda.util.Validador;
 
 import javax.swing.JComboBox;
 

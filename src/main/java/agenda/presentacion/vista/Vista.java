@@ -16,7 +16,7 @@ import javax.swing.JButton;
 public class Vista {
 	private JFrame ventana;
 	private JTable tablaContactos;
-	private JButton btnAgregar, btnBorrar, btnModificar, btnReporte;
+	private JButton btnAgregar, btnBorrar, btnModificar, btnReporte, btnConfigurar;
 	private DefaultTableModel modelContactos;
 	private String[] nombreColumnas = {"Nombre", "Apellido", "Teléfono","E-mail","Calle","Número","Piso","Depto","Localidad","Cumpleaños", "Tipo de contacto"};
 
@@ -44,17 +44,20 @@ public class Vista {
 		btnBorrar = new JButton("Borrar contacto");
 		btnModificar = new JButton("Modificar contacto");
 		btnReporte = new JButton("Mostrar reporte");
+		btnConfigurar = new JButton("Configurar conexion");
 		
-		int fila = 280, ancho = 200, alto = 25;
+		int fila = 280, ancho = 180, alto = 25;
 		btnAgregar.setBounds(10, fila, ancho, alto);
-		btnBorrar.setBounds(280, fila, ancho, alto);
-		btnModificar.setBounds(550, fila, ancho, alto);		
-		btnReporte.setBounds(820, fila, ancho, alto);
+		btnBorrar.setBounds(230, fila, ancho, alto);
+		btnModificar.setBounds(450, fila, ancho, alto);		
+		btnReporte.setBounds(670, fila, ancho, alto);
+		btnConfigurar.setBounds(890, fila, ancho, alto);
 		
 		panel.add(btnAgregar);
 		panel.add(btnBorrar);
 		panel.add(btnModificar);
 		panel.add(btnReporte);
+		panel.add(btnConfigurar);
 	}
 	
 	public void show() {
@@ -89,6 +92,14 @@ public class Vista {
 
 	public JButton getBtnModificar(){
 		return btnModificar;
+	}
+
+	public JButton getBtnConfigurar(){
+		return btnConfigurar;
+	}
+	
+	public JFrame getVentana(){
+		return ventana;
 	}
 	
 	public DefaultTableModel getModelContactos()	{

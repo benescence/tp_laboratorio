@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.apache.log4j.Logger;
 
-import agenda.negocios.Propiedades;
+import agenda.util.Propiedades;
 
 public class Conexion {
 	public static Conexion instancia;

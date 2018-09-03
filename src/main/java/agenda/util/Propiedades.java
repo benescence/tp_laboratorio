@@ -1,4 +1,5 @@
-package agenda.negocios;
+package agenda.util;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class Propiedades {
 	public static String recuperar(String clave) {	
 		Properties propiedades = new Properties();
 		InputStream entrada = null;
-		String ret = "";
+		String ret = null;
 		
 		try {	
 			entrada = new FileInputStream(direccion);
@@ -69,12 +70,14 @@ public class Propiedades {
 		mapa.put("puerto", "3306");
 		mapa.put("usuario", "root");
 		mapa.put("password", "root");
+		mapa.put("primera_vez", "SI");
 		guardar(mapa);
 		
 		System.out.println(recuperar("IP"));
 		System.out.println(recuperar("puerto"));
 		System.out.println(recuperar("usuario"));
 		System.out.println(recuperar("password"));
+		System.out.println(recuperar("primera_vez"));
 	}
 	
 }

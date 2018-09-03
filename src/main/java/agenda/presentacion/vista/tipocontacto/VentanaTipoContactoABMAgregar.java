@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import agenda.presentacion.controlador.ControladorTipoContactoABM;
-import agenda.presentacion.vista.util.Validador;
+import agenda.util.Validador;
 
 public class VentanaTipoContactoABMAgregar extends JFrame {
 	private static final long serialVersionUID = 1L;

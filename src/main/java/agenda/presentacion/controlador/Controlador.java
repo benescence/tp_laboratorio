@@ -5,11 +5,11 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
-
 import agenda.negocios.Agenda;
 import agenda.persistencia.pojos.PersonaDTO;
 import agenda.presentacion.reportes.ReporteAgenda;
 import agenda.presentacion.vista.Vista;
+import agenda.presentacion.vista.configurar.VentanaConfigurar;
 import agenda.presentacion.vista.contacto.VentanaContactoAgregar;
 import agenda.presentacion.vista.contacto.VentanaContactoModificar;
 import agenda.presentacion.vista.localidad.VentanaLocalidadABM;
@@ -31,6 +31,7 @@ public class Controlador implements ActionListener {
 		this.vista.getBtnBorrar().addActionListener(this);
 		this.vista.getBtnReporte().addActionListener(this);
 		this.vista.getBtnModificar().addActionListener(this);
+		this.vista.getBtnConfigurar().addActionListener(this);
 	}
 	
 	public void inicializar() {
@@ -38,7 +39,6 @@ public class Controlador implements ActionListener {
 		vista.show();
 	}
 
-	
 	public void recargarTabla() {
 		vista.getModelContactos().setRowCount(0);
 		vista.getModelContactos().setColumnCount(0);
@@ -94,6 +94,13 @@ public class Controlador implements ActionListener {
 		else if(e.getSource() == vista.getBtnReporte()) {
 			ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonas());
 			reporte.mostrar();				
+		}
+		
+		// CONFIGURAR CONEXION
+		else if(e.getSource() == vista.getBtnConfigurar()) {
+			vista.getVentana().dispose();
+			VentanaConfigurar ventana = new VentanaConfigurar();
+			new ControladorConfigurar(ventana);
 		}
 		
 		

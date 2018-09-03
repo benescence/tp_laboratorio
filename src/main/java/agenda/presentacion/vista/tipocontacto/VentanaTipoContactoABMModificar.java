@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import agenda.persistencia.pojos.TipoContactoDTO;
 import agenda.presentacion.controlador.ControladorTipoContactoABM;
-import agenda.presentacion.vista.util.Validador;
+import agenda.util.Validador;
 
 public class VentanaTipoContactoABMModificar extends JFrame {
 	private static final long serialVersionUID = 1L;

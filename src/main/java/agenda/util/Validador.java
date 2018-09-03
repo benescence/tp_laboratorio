@@ -1,4 +1,4 @@
-package agenda.presentacion.vista.util;
+package agenda.util;
 
 public class Validador {
 

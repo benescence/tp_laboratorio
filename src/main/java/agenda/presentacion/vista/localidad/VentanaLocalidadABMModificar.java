@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import agenda.persistencia.pojos.LocalidadDTO;
 import agenda.presentacion.controlador.ControladorLocalidadABM;
-import agenda.presentacion.vista.util.Validador;
+import agenda.util.Validador;
 
 public class VentanaLocalidadABMModificar extends JFrame {
 	private static final long serialVersionUID = 1L;
