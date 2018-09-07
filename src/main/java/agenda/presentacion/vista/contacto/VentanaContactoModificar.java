@@ -208,7 +208,6 @@ public class VentanaContactoModificar extends JFrame {
 		contenedor.add(inTipoContacto);
 	}
 
-
 	public boolean validarInputs() {
 		String mensaje = "Su formulario contiene entradas invalidas:\n";
 		boolean isOk = true;
@@ -218,27 +217,32 @@ public class VentanaContactoModificar extends JFrame {
 			mensaje += "    -El NOMBRE solo puede consistir de letras y espacios\n";
 		}
 
-		if (!Validador.formatoNumeroLetraEspacio(inCalle.getText())) {
+		if (!Validador.formatoApellido(inApellido.getText())) {
+			isOk = false;
+			mensaje += "    -El APELLIDO solo puede consistir de letras y espacios\n";
+		}
+
+		if (!Validador.formatoCalle(inCalle.getText())) {
 			isOk = false;
 			mensaje += "    -La CALLE solo puede consistir de letras, numeros y espacios\n";
 		}
 
-		if (!Validador.formatoNumerico(inTelefono.getText())) {
+		if (!Validador.formatoTelefono(inTelefono.getText())) {
 			isOk = false;
 			mensaje += "    -El TELEFONO solo puede consistir de numeros\n";
 		}
 		
-		if (!Validador.formatoNumerico(inNumero.getText())) {
+		if (!Validador.formatoNumero(inNumero.getText())) {
 			isOk = false;
 			mensaje += "    -El NUMERO solo puede consistir de numeros\n";
 		}
 		
-		if (!Validador.formatoNumerico(inPiso.getText())) {
+		if (!Validador.formatoPiso(inPiso.getText())) {
 			isOk = false;
 			mensaje += "    -El PISO solo puede consistir de numeros\n";
 		}
 
-		if (!Validador.formatoNumeroLetraEspacio(inDepto.getText())) {
+		if (!Validador.formatoDepartamento(inDepto.getText())) {
 			isOk = false;
 			mensaje += "    -El DEPTO solo puede consistir de letras, numeros y espacios\n";
 		}
@@ -253,7 +257,7 @@ public class VentanaContactoModificar extends JFrame {
 		
 		return isOk;
 	}
-	
+		
 	// Getters para valores de posicion
 	private int getFilaY(int fila) {
 		int[] filas = {10, 40, 70, 100, 130, 160, 190, 220, 250, 460}; 

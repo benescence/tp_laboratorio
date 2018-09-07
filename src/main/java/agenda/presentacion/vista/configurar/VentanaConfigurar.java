@@ -3,11 +3,13 @@ package agenda.presentacion.vista.configurar;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import agenda.util.Propiedades;
+import agenda.util.Validador;
 
 public class VentanaConfigurar extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -80,57 +82,37 @@ public class VentanaConfigurar extends JFrame {
 		
 		setVisible(true);
 	}
-		/*
+		
 	public boolean validarInputs() {
 		String mensaje = "Su formulario contiene entradas invalidas:\n";
 		boolean isOk = true;
 		
-		if (!Validador.formatoLetraEspacio(inNombre.getText())) {
+		if (!Validador.formatoIP(inIP.getText())) {
 			isOk = false;
-			mensaje += "    -El NOMBRE solo puede consistir de letras y espacios\n";
+			mensaje += "    -El IP solo puede consistir de letras, numeros o puntos\n";
 		}
 
-		if (!Validador.formatoApellido(inApellido.getText())) {
+		if (!Validador.formatoNumerico(inPuerto.getText())) {
 			isOk = false;
-			mensaje += "    -El APELLIDO solo puede consistir de letras y espacios\n";
+			mensaje += "    -El PUERTO solo puede consistir de numeros\n";
 		}
 
-		if (!Validador.formatoCalle(inPuerto.getText())) {
+		if (!Validador.formatoLetra(inUsuario.getText())) {
 			isOk = false;
-			mensaje += "    -La CALLE solo puede consistir de letras, numeros y espacios\n";
+			mensaje += "    -La USUARIO solo puede consistir de letras\n";
 		}
 
-		if (!Validador.formatoTelefono(inTelefono.getText())) {
+		if (!Validador.formatoNumeroLetra(inPassword.getText())) {
 			isOk = false;
-			mensaje += "    -El TELEFONO solo puede consistir de numeros\n";
+			mensaje += "    -El PASSWORD solo puede consistir de numeros y letras\n";
 		}
 		
-		if (!Validador.formatoNumero(inPassword.getText())) {
-			isOk = false;
-			mensaje += "    -El NUMERO solo puede consistir de numeros\n";
-		}
-		
-		if (!Validador.formatoPiso(inPiso.getText())) {
-			isOk = false;
-			mensaje += "    -El PISO solo puede consistir de numeros\n";
-		}
-
-		if (!Validador.formatoDepartamento(inUsuario.getText())) {
-			isOk = false;
-			mensaje += "    -El DEPTO solo puede consistir de letras, numeros y espacios\n";
-		}
-		
-		if (!Validador.formatoMail(inIP.getText())) {
-			isOk = false;
-			mensaje += "    -El E-MAIL debe tener la forma A1@A1 (A1 representa uno o mas numeros o letras\n";
-		}
-
 		if (!isOk)
 			JOptionPane.showMessageDialog(null, mensaje);
 		
 		return isOk;
 	}
-	*/
+	
 	
 	// Getters para valores de posicion
 	private int getFilaY(int fila) {

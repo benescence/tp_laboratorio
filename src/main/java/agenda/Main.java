@@ -19,14 +19,9 @@ public class Main {
 		String password = Propiedades.recuperar("password");
 		return Conexion.probarConexion(usuario, password, IP, puerto);
 	}
-	
-	public static boolean esPrimeraSesion() {
-		String primeraVez = Propiedades.recuperar("primera_vez");
-		return (primeraVez.equals("SI"));
-	}
 
 	public static void main(String[] args) {
-		if (esPrimeraSesion()) {
+		if (Conexion.esPrimeraSesion()) {
 			String mensaje = "Felicidades por adquirir la nueva Agenda UNGS.\n"+
 					"Acontinuacion debe configurar los datos de conexion para comenzar a utilizarla.\n"+
 					"Recomendamos dejar los datos por defecto.";

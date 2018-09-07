@@ -21,7 +21,6 @@ public class Agenda {
 		tipoContactoDAO = metodo_persistencia.crearTipoContactoDAO();
 	}
 	
-	
 	// ABM PERSONAS
 	public void agregarPersona(PersonaDTO persona) {
 		personaDAO.insert(persona);
@@ -39,7 +38,6 @@ public class Agenda {
 		return personaDAO.readAll();		
 	}
 
-	
 	// ABM LOCALIDADES
 	public void agregarLocalidad(LocalidadDTO localidad) {
 		localidadDAO.insert(localidad);
@@ -61,7 +59,6 @@ public class Agenda {
 		return localidadDAO.readAll();		
 	}
 	
-	
 	// ABM TIPOS DE CONTACTO
 	public void agregarTipoDeContacto(TipoContactoDTO tipo) {
 		tipoContactoDAO.insert(tipo);
@@ -82,8 +79,5 @@ public class Agenda {
 	public List<TipoContactoDTO> obtenerTiposDeContacto() {
 		return tipoContactoDAO.readAll();		
 	}
-	
-	
-	
 	
 }
